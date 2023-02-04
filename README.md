@@ -1,2 +1,3 @@
-# veraison.github.io
+# veraison-project.org
+
 Veraison project web site
