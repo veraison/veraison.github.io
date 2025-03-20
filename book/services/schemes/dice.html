@@ -1,0 +1,417 @@
+<!DOCTYPE HTML>
+<html lang="en" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>DICE - Veraison Project</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../.././mdbook-admonish.css">
+        <link rel="stylesheet" href="../../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Veraison Project</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<style>
+.mdbook-alerts {
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  border-left: 0.25em solid var(--mdbook-alerts-color);
+}
+
+.mdbook-alerts > *:first-child {
+  margin-top: 0;
+}
+
+.mdbook-alerts > *:last-child {
+  margin-bottom: 0;
+}
+
+.mdbook-alerts-title {
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  line-height: 1;
+  color: var(--mdbook-alerts-color);
+  text-transform: capitalize;
+}
+
+.mdbook-alerts-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.2em;
+  background-color: currentColor;
+  -webkit-mask: no-repeat center / 100%;
+  mask: no-repeat center / 100%;
+  -webkit-mask-image: var(--mdbook-alerts-icon);
+  mask-image: var(--mdbook-alerts-icon);
+}
+
+.mdbook-alerts-note {
+  --mdbook-alerts-color: rgb(9, 105, 218);
+  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-tip {
+  --mdbook-alerts-color: rgb(26, 127, 55);
+  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-important {
+  --mdbook-alerts-color: rgb(130, 80, 223);
+  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-warning {
+  --mdbook-alerts-color: rgb(154, 103, 0);
+  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-caution {
+  --mdbook-alerts-color: rgb(207, 34, 46);
+  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
+}
+
+</style>
+<h1 id="dice"><a class="header" href="#dice">DICE</a></h1>
+<h2 id="standard-documents"><a class="header" href="#standard-documents">Standard Documents</a></h2>
+<p>Device Identifier Composition Engine (DICE) is an attestation standard developed by the Trusting Computing Group (TCG).  DICE builds on the device identity and device attestation concepts introduced in <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/06/RIoT20Paper-1.1-1.pdf">Robust Internet-of-Things (RIoT)</a> from Microsoft Research.</p>
+<p>The DICE specification is split across the following core documents:</p>
+<ul>
+<li><a href="https://trustedcomputinggroup.org/resource/hardware-requirements-for-a-device-identifier-composition-engine/">Hardware Requirements</a>, describing the DICE Root of Trust (RoT) and the construction of the (unique) Compound Device Identifier (CDI).</li>
+<li><a href="https://trustedcomputinggroup.org/resource/dice-layering-architecture/">Layering Architecture</a>, describing the construction of a device's layered identity rooted in the CDI and obtained via the recursive invocation of a simple primitive based on measurements and per-device secret seeding.</li>
+<li><a href="https://trustedcomputinggroup.org/resource/dice-attestation-architecture/">Attestation Architecture</a>, describing how DICE-based attestation fits in the wider <a href="https://www.ietf.org/archive/id/draft-ietf-rats-architecture-12.html">RATS architecture</a>.</li>
+</ul>
+<p>Other relevant documents include:</p>
+<ul>
+<li><a href="https://trustedcomputinggroup.org/resource/dice-certificate-profiles/">Certificate Profiles</a>, describing how X.509 certificates that carry public keys derived from DICE identities look like.</li>
+<li><a href="https://trustedcomputinggroup.org/resource/symmetric-identity-based-device-attestation/">Symmetric Identity Based Device Attestation</a>, describing how to derive symmetric key material from DICE identities and how that could be used in authentication and attestation protocols.</li>
+</ul>
+<p>A further "DICE Endorsements Architecture" document, describing the information model (IM) for endorsed and reference values, is currently under revision in the TCG.  The official document is not yet published, but a data model based on the IM is available in the <a href="https://github.com/ietf-rats/ietf-corim-cddl">CoRIM repository</a> of which Veraison provides a <a href="https://github.com/veraison/corim">Golang implementation</a>.</p>
+<h2 id="googles-open-profile-for-dice"><a class="header" href="#googles-open-profile-for-dice">Google's Open Profile for DICE</a></h2>
+<p>Google has released the specification of an <a href="https://pigweed.googlesource.com/open-dice/+/HEAD/docs/specification.md">Open Profile for DICE</a> based on TCG's "Hardware Requirements" and "Layering Architecture" documents, along with a C99 implementation as part of the <a href="https://pigweed.dev">Pigweed</a> project.</p>
+<p>While the core concepts are unchanged, there are a few notable differences from TCG DICE, mainly around the encoding of payloads.  See the <a href="#open-dice-formats">Open DICE Formats</a> section for the details.</p>
+<h2 id="dice-concepts"><a class="header" href="#dice-concepts">DICE Concepts</a></h2>
+<h3 id="glossary"><a class="header" href="#glossary">Glossary</a></h3>
+<ul>
+<li>
+<p><strong>DICE Hardware RoT</strong> - The HW implementation of the DICE processing engine, acting as the terminal trust anchor in a DICE device.</p>
+</li>
+<li>
+<p><strong>Unique Device Secret (UDS)</strong> - A permanent, (statistically) unique, secret value.  Every instance of a DICE device has its own UDS stashed away in a location only accessible to the DICE engine.  The UDS can be injected at manufacturing time, or generated by the device itself using a suitable PRNG.</p>
+</li>
+<li>
+<p><strong>Trusted Computing Base (TCB)</strong> : All the security relevant HW and SW in a DICE device.  DICE organizes the TCB in multiple "components", which are grouped in "layers" stacked one on top of the other, starting with the DICE engine.  A layer boundary represents an explicit handover point from one component to one or more components in the "next" stage of the boot chain.</p>
+</li>
+<li>
+<p><strong>TCB Component Identifier (TCI)</strong> - A (statistically) unique identifier for a TCB component.  This value is computed by digesting the component's measurement along with other component-specific attributes, e.g., vendor name, version, etc.</p>
+</li>
+<li>
+<p><strong>TCB Info</strong> - The information model of a TCB component.  It gathers a standard set of attributes (and associate types) that describe a TCB, for example: its model, vendor, Firmware digests, version, etc.</p>
+</li>
+<li>
+<p><strong>Compound Device Identifier (CDI)</strong> - This value represents the (statistically) unique identity of each layer in the bootstrap sequence.  The CDI for a given layer is obtained by hashing together the predecessor CDI and the TCI for the current layer.  This recursive construction is such that the resulting CDIs are inextricably chained: when one CDI changes (e.g., because the measured software component is updated, and the TCI mutates accordingly), all its successor CDIs change as well.  Crucially, the CDI is directly used as a seed for deriving cryptographic credentials (e.g., an ECDSA key pair) for the corresponding TCB component.</p>
+</li>
+</ul>
+<blockquote>
+<p>NOTE: At first it might seem like the scalability properties of DICE verification vis-a-vis software &amp; configuration updates of TCB components are terrible.  The verifier would have to be re-provisioned with all the updated identities of all the devices of the same "class" if a bit was flipped in their TCB.  Luckily, the situation is not so gloomy: as long as the lowest layer in the DICE chain is stable (as in "never updated") and the DICE compound identity is provided as a certification chain rooted either in the lowest layer or in an external CA that issues the cert for the lowest layer, an identity update of the i-th layer can be re-computed dynamically by a verifier without need to further interact with the supply chain -- except for re-provisioning the verifier with the updated measurement.  The key requirement is the stability of the so-called "Layer 0" / "First Mutable Code" (FMC), and therefore of its cryptographic identity.  The latter is a pretty important bit in DICE and it's given the proper name of "Device Id".  The Device Id key pair is associated with an IEEE 802.1AR IDevID cert.</p>
+</blockquote>
+<h3 id="evidence"><a class="header" href="#evidence">Evidence</a></h3>
+<p>DICE models attestation evidence as a layered &amp; chained set of claims.  The claims in each layer are of two kinds:</p>
+<ol>
+<li>The cryptographic identity associated with the layer (typically, a public key),</li>
+<li>The layer's measurements used as input in the identity derivation function.</li>
+</ol>
+<p>The recommended way to encode evidence is using standard X.509 scaffolding:</p>
+<ol>
+<li>A certificate for the layer's public key signed by the previous layer's private key,</li>
+<li>A set of custom certificate extensions to encode the TCB measurements.</li>
+</ol>
+<p>Theoretically, other formats are acceptable; for example, Open-DICE envisages the use of chained CWTs).</p>
+<h3 id="tcg-dice-formats"><a class="header" href="#tcg-dice-formats">TCG DICE Formats</a></h3>
+<pre><code class="language-asn.1">tcg OBJECT IDENTIFIER ::= { 2 23 133 }
+
+tcg-dice OBJECT IDENTIFIER ::= { tcg platformClass(5) 4 }
+</code></pre>
+<h4 id="tcb-info"><a class="header" href="#tcb-info">TCB Info</a></h4>
+<p>TCB Info represents the data and metadata associated with the component identity.  It can be roughly split into two logically separate parts: naming / identification attributes on one side (i.e., <code>vendor</code>, <code>vendorInfo</code>, <code>model</code>, <code>version</code>, <code>svn</code>, <code>layer</code> and <code>index</code>), measurement values on the other (i.e., <code>fwids</code>, <code>flags</code> and <code>type</code>)</p>
+<p>See Section 6.1.1 of the Attestation Architecture document for a detailed description of the semantics associated with individual fields.</p>
+<pre><code class="language-asn.1">tcg-dice-TcbInfo OBJECT IDENTIFIER ::= {tcg-dice 1}
+
+DiceTcbInfo ::== SEQUENCE {
+    vendor      [0] IMPLICIT UTF8String OPTIONAL,
+    model       [1] IMPLICIT UTF8String OPTIONAL,
+    version     [2] IMPLICIT UTF8String OPTIONAL,
+    svn         [3] IMPLICIT INTEGER OPTIONAL,
+    layer       [4] IMPLICIT INTEGER OPTIONAL,
+    index       [5] IMPLICIT INTEGER OPTIONAL,
+    fwids       [6] IMPLICIT FWIDLIST OPTIONAL,
+    flags       [7] IMPLICIT OperationalFlags OPTIONAL,
+    vendorInfo  [8] IMPLICIT OCTET STRING OPTIONAL,
+    type        [9] IMPLICIT OCTET STRING OPTIONAL
+}
+
+FWIDLIST ::== SEQUENCE SIZE (1..MAX) OF FWID
+
+FWID ::== SEQUENCE {
+    hashAlg OBJECT IDENTIFIER,
+    digest OCTET STRING
+}
+
+OperationalFlags ::= BIT STRING {
+    notConfigured (0),
+    notSecure (1),
+    recovery (2),
+    debug (3)
+}
+</code></pre>
+<p>Multiple TCB Info payloads, each associated with a different component in the layer, can be put together into the same certificate using a <code>DiceTcbInfoSeq</code>:</p>
+<pre><code class="language-asn.1">tcg-dice-MultiTcbInfo OBJECT IDENTIFIER ::= { tcg-dice 5 }
+
+DiceTcbInfoSeq ::= SEQUENCE SIZE (1..MAX) OF DiceTcbInfo
+</code></pre>
+<p>Even though further extensions have been defined (for the full list see Section 6.1 of <a href="https://trustedcomputinggroup.org/resource/dice-attestation-architecture/">"Attestation Architecture"</a> -- for example one that allows unsigned <a href="https://datatracker.ietf.org/doc/draft-ietf-rats-eat/">EAT</a> claims to be embedded in an X.509 extension -- <code>DiceTcbInfo</code> is the (currently) preferred way.</p>
+<h3 id="open-dice-formats"><a class="header" href="#open-dice-formats">Open DICE Formats</a></h3>
+<p>In Open DICE, the equivalent of the TCB Info is called <code>OpenDiceInput</code> and has a very regular layout, with data and metadata for code, configuration and authority respectively:</p>
+<pre><code class="language-asn.1">Mode ::= INTEGER (0..3)
+
+OpenDiceInput ::= SEQUENCE {
+  codeHash                [0] EXPLICIT OCTET STRING OPTIONAL,
+  codeDescriptor          [1] EXPLICIT OCTET STRING OPTIONAL,
+  configurationHash       [2] EXPLICIT OCTET STRING OPTIONAL,
+  configurationDescriptor [3] EXPLICIT OCTET STRING OPTIONAL,
+  authorityHash           [4] EXPLICIT OCTET STRING OPTIONAL,
+  authorityDescriptor     [5] EXPLICIT OCTET STRING OPTIONAL,
+  mode                    [6] EXPLICIT Mode OPTIONAL,
+}
+</code></pre>
+<p>For further details regarding the Open DICE X.509 profile, see the <a href="https://pigweed.googlesource.com/open-dice/+/HEAD/docs/specification.md#certificate-details">Certificate Details</a> section of the spec.</p>
+<p>Open DICE also allows encoding UDS and CDI certificates in <a href="https://pigweed.googlesource.com/open-dice/+/HEAD/docs/specification.md#CBOR-UDS-Certificates">CBOR Web Tokens (CWT)</a> similar to <a href="https://datatracker.ietf.org/doc/draft-ietf-rats-eat/">EAT</a>.   It also allows for hybrid cert chains, with co-existing X.509 and CWT certs in the same logical chain, to support legacy component integrations.</p>
+<h2 id="dice-from-a-veraisons-perspective"><a class="header" href="#dice-from-a-veraisons-perspective">DICE from a Veraison's Perspective</a></h2>
+<p>Miscellaneous implementation &amp; deployment considerations.</p>
+<h3 id="asymmetric-crypto-identities"><a class="header" href="#asymmetric-crypto-identities">Asymmetric Crypto Identities</a></h3>
+<p>Typically, DICE identities are associated with asymmetric key pairs.</p>
+<blockquote>
+<p>NOTE: This mode is, from a security perspective, the most desirable.  In fact, when using public keys for verification, the verifier only needs to take care of their availability and integrity.</p>
+</blockquote>
+<p>Effectively a verifier only stores the device trust anchor, which could be an external root CA -- for example the ODM's -- or the self-signed certificate of the device in case there is no external CA to anchor the cert chain.  The former providing a much more scalable solution, with individual device revocation handled via standard CRLs.</p>
+<h3 id="symmetric-crypto-identities"><a class="header" href="#symmetric-crypto-identities">Symmetric Crypto Identities</a></h3>
+<p>"Symmetric Identity Based Device Attestation" describes how to associate DICE identities with symmetric crypto keys.</p>
+<p>In this case, the verifier must have a-priori knowledge of the device secret as well as a detailed understanding of the identity derivation algorithm in order to verify the device's authenticated assertions.  This assumes a level of coupling between attesters and verifiers that, I reckon, is not achievable using only the available TCG standards, which tend to be quite liberal around the implementation details.  The Open-DICE specification only allows identities based on asymmetric keys.</p>
+<blockquote>
+<p>NOTE: This mode shifts all the costs on the verification infra.  It is an operational nightmare with a vast attack surface and very limited scalability.  It should be deemed acceptable only when the cost of a key compromise / disclosure is (very) low, and the device fleet is roughly static with very infrequent software updates.</p>
+</blockquote>
+<h3 id="verification"><a class="header" href="#verification">Verification</a></h3>
+<p>We expect that, typically, DICE evidence submitted for verification is not bound to an explicit challenge-response session.  This is likely to require defining a new Veraison API alongside the existing <a href="api/challenge-response/README.html">challenge-response</a> endpoint.</p>
+<p>Given the fact that TCG DICE has a few loose ends, mainly in terms of evidence encoding formats and the nature of cryptographic identities, Veraison will have to be as flexible as possible while clearly documenting the supported feature set.</p>
+<p>Open-DICE defines a stricter (and smaller) set of requirements and therefore it'd be probably easier to implement fully.</p>
+<p>Veraison <a href="https://github.com/veraison/dice">DICE implementation</a> will need to be extended with APIs for claims extraction.  The existing certificate chain verification API should be OK as-is.</p>
+<h3 id="endorsements-provisioning"><a class="header" href="#endorsements-provisioning">Endorsements Provisioning</a></h3>
+<p>By definition, native CoRIM fully supports TCG DICE, so there should be no extra work needed to profile the <a href="https://github.com/veraison/corim">corim</a> API, which already implements the entirety of CoRIM.</p>
+<p>Open-DICE has a slightly different description of the TCB which will need to be reflected in a CoRIM profile.  It should be a pretty straightforward operation.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../services/schemes/psa_and_cca.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../services/policies.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../services/schemes/psa_and_cca.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../services/policies.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/pagetoc.js"></script>
+        <script src="../../mermaid.min.js"></script>
+        <script src="../../mermaid-init.js"></script>
+
+
+    </div>
+    </body>
+</html>

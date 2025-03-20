@@ -1,0 +1,594 @@
+<!DOCTYPE HTML>
+<html lang="en" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>aws - Veraison Project</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../.././mdbook-admonish.css">
+        <link rel="stylesheet" href="../../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Veraison Project</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<style>
+.mdbook-alerts {
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  border-left: 0.25em solid var(--mdbook-alerts-color);
+}
+
+.mdbook-alerts > *:first-child {
+  margin-top: 0;
+}
+
+.mdbook-alerts > *:last-child {
+  margin-bottom: 0;
+}
+
+.mdbook-alerts-title {
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  line-height: 1;
+  color: var(--mdbook-alerts-color);
+  text-transform: capitalize;
+}
+
+.mdbook-alerts-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.2em;
+  background-color: currentColor;
+  -webkit-mask: no-repeat center / 100%;
+  mask: no-repeat center / 100%;
+  -webkit-mask-image: var(--mdbook-alerts-icon);
+  mask-image: var(--mdbook-alerts-icon);
+}
+
+.mdbook-alerts-note {
+  --mdbook-alerts-color: rgb(9, 105, 218);
+  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-tip {
+  --mdbook-alerts-color: rgb(26, 127, 55);
+  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-important {
+  --mdbook-alerts-color: rgb(130, 80, 223);
+  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-warning {
+  --mdbook-alerts-color: rgb(154, 103, 0);
+  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-caution {
+  --mdbook-alerts-color: rgb(207, 34, 46);
+  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
+}
+
+</style>
+<h1 id="aws-deployment"><a class="header" href="#aws-deployment">AWS Deployment</a></h1>
+<p>This deployment runs Veraison services and a Keycloak instance on EC2 instances
+behind load balancers. An RDS instance running Postgres is used for key-value
+stores, and a memcached instance is used for session management.</p>
+<h2 id="dependencies"><a class="header" href="#dependencies">Dependencies</a></h2>
+<p>This deployment depends on the <code>debian</code> deployment (which, in turn, depends on
+the <code>native</code> deployment). Please see <a href="debian.html#dependencies">its
+README</a> for the dependencies list.</p>
+<p>Additionally, the following dependencies are required specifically for AWS deployment:</p>
+<ul>
+<li><code>curl</code>: used to transfer the Debian package to the EC2 node.</li>
+<li><code>openssl</code>: used to generate TLS certs (note: unlike with <code>native</code> deployment,
+where pre-generated certs may optionally be used, cert generation is mandatory
+for this deployment, as the certs must be specific to the created EC2 instance).</li>
+<li><code>packer</code>: used to build AMI images using temporary EC2 instances.</li>
+<li><code>psql</code>: Postgres client used to initialise the stores (may be packaged on its
+own or as part of <code>postgres</code>, depending on the platform).</li>
+<li>A number of Python packages used by the deployment script. Please see
+<a href="https://github.com/veraison/services/blob/main/deployments/aws/misc/requirements.txt">requirements.txt</a> for details.</li>
+</ul>
+<p><code>curl</code> and <code>openssl</code> should be available from your OS's package manager. Python
+dependencies are installable via <code>pip</code>/<code>PyPI</code>. For <code>packer</code>, please see <a href="https://developer.hashicorp.com/packer/tutorials/aws-get-started/get-started-install-cli">its
+documentation</a>.</p>
+<h3 id="bootstrap"><a class="header" href="#bootstrap">Bootstrap</a></h3>
+<p>To simplify dependency installation, the deployment script implements bootstrap
+for Arch, Ubuntu, and MacOSX (using <a href="https://brew.sh">homebrew</a>).</p>
+<pre><code class="language-bash">git clone https://github.com/veraison/services.git
+cd services/deployments/aws
+
+make bootstrap
+</code></pre>
+<p>(this will only work on the above-mentioned platforms).</p>
+<h3 id="aws-account"><a class="header" href="#aws-account">AWS account</a></h3>
+<p>You need an existing AWS account. Please see <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/guide/credentials.html">boto3
+documentation</a>
+for how to configure <code>aws</code> CLI to access this account.</p>
+<p>The AWS credentials will also need to available to <code>packer</code> tool. Where
+<code>packer</code> looks for them is described by <a href="https://developer.hashicorp.com/packer/integrations/hashicorp/amazon#environment-variables">packer
+docs</a>.</p>
+<p>The simplest way to configure credentials is probably via Single Sign On (SSO).</p>
+<ol>
+<li>Run
+<pre><code class="language-bash">aws configure sso
+</code></pre>
+and follow the interactive wizard to specify configuration.</li>
+<li>Make sure the configuration works by doing
+<pre><code class="language-bash">aws sso login
+</code></pre>
+You will need to periodically re-do this step when your current login
+expires (usually around once a day).</li>
+<li>Create <code>AWS_PROFILE</code> environment variable pointing to profile created in
+step (1).
+<pre><code class="language-bash">export AWS_PROFILE=&lt;YOU PROFILE NAME&gt;
+</code></pre>
+</li>
+</ol>
+<p>The steps above are not the only way to establish AWS credentials. Please refer
+to the documentation linked above for alternatives.</p>
+<h3 id="domain-and-certificate"><a class="header" href="#domain-and-certificate">Domain and certificate</a></h3>
+<p>Finally, you need a domain registered in Route53, with a corresponding
+certificate created in ACM. If you already have a domain with a different
+registrar, you will need to transfer it to Route53.</p>
+<p>The certificate MUST cover subdomains as well. For example, if you have
+registered <code>my-domain.com</code> in Route53, the certificate should have
+<code>*.my-domain.com</code> in its Subject Alternative Names.</p>
+<p>For creating a new domain, please see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html">Register a new
+domain</a>
+or <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html">Transferring registration for a
+domain</a>.
+For information on setting up a certificate in ACM please see <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs.html">AWS Certificate
+Manager</a></p>
+<h2 id="quickstart"><a class="header" href="#quickstart">Quickstart</a></h2>
+<p>Before creating a deployment, you need to provide account-specific
+configuration that specifies the IDs of the VPC and subnets that will be used
+for the deployment as well as the CIDR that will be granted access to the
+deployment. Please use <a href="https://github.com/veraison/services/blob/main/deployments/aws/misc/arm.cfg">misc/arm.cfg</a> for an example.</p>
+<p>Once the account-specific config file is created, define <code>AWS_ACCOUNT_CFG</code>
+environment variable to point to it and execute <code>make deploy</code> to create the
+deployment.</p>
+<pre><code class="language-bash">export AWS_ACCOUNT_CFG=misc/arm.cfg  # replace with path to your config
+make deploy
+</code></pre>
+<div class="mdbook-alerts mdbook-alerts-note">
+<p class="mdbook-alerts-title">
+  <span class="mdbook-alerts-icon"></span>
+  note
+</p>
+<p>This could take a while -- in the order of 45 minutes, depending on how
+responsive AWS is.</p>
+</div>
+<p>Deployment can be accessed via CLI front end:</p>
+<pre><code class="language-bash">source env/env.bash  # for bash, or alternatively, env/env.zsh for Zsh users
+veraison status
+</code></pre>
+<p>This should display the DNS name and IP address of the instance and show
+Veraison services as active and running.</p>
+<p>To make sure the deployment works, you can run through
+<a href="https://github.com/veraison/services/blob/main/end-to-end/README.md">end-to-end</a> flow.</p>
+<p>For example</p>
+<pre><code class="language-bash"># env/env.bash must be sourced
+../../end-to-end/end-to-end-aws provision
+# followed by
+../../end-to-end/end-to-end-aws verify rp
+</code></pre>
+<p>Finally, to remove the deployment, you can run</p>
+<pre><code class="language-bash">make really-clean
+</code></pre>
+<h2 id="deployment-overview"><a class="header" href="#deployment-overview">Deployment overview</a></h2>
+<p><img src="https://github.com/veraison/services/raw/main/deployments/aws/misc/deployment-diagram.drawio.png" alt="deployment diagram" /></p>
+<p>Veraison is deployed into a dedicated VPC created within the AWS region
+specified by <code>VERAISON_AWS_REGION</code> inside <code>deployment.cfg</code> (the region must
+contain at least two availability zones). The address space for the VPC is
+determined by <code>VERAISON_VPC_CIDR</code>. It must be large enough to accommodate four
+subnets of equal size, with a subnet being large enough to hold the expected
+number of instances (at least <code>/16</code> CIDR is recommended).</p>
+<p>The VPC spans two availability zones, each containing a public and a private
+subnet. The public subnets host load balancers for Veraison services and
+Keycloak. The first public subnet also hosts the sentinel EC2 instance which is
+used to configure RDS database. The private subnets host auto-scaled service
+instances, keycloak instance, and the RDS instance.</p>
+<p>The deployment adds three subdomains to the domain registered in route 53 --
+one each for the services load balancer, keycloak load balancer, and the
+sentinel instance.</p>
+<h2 id="deployment-bring-up-and-tear-down"><a class="header" href="#deployment-bring-up-and-tear-down">Deployment bring up and tear down</a></h2>
+<p><code>make</code> calls shown above just invoke <code>deployment.sh</code> with an appropriate
+command. <code>make bootstrap</code> calls <code>deployment.sh bootstrap</code>, <code>make deploy</code> calls
+<code>deployment.sh bringup</code>, and <code>make really-clean</code> calls <code>deployment.sh teardown</code>.</p>
+<p><code>deployment.sh</code> loads the environment from <code>deployment.cfg</code> and the additional
+file specified by <code>AWS_ACCOUNT_CFG</code>, and executes the function associated with
+the specified command, which, in turn, calls through to the <code>bin/veraison</code>
+script.</p>
+<p>The first time <code>veraison</code> script is invoked, <code>--deployment-name</code> should be
+specified before the subcommand to indicate which deployment the script's
+subcommand should apply to. The script will remember it for future invocations,
+so there is no need to specify it again unless you want to switch the current
+deployment. <code>deployment.sh</code> take the value for this flag from
+<code>VERAISON_AWS_DEPLOYMENT</code> environment variable (specified inside
+<code>deployment.cfg</code>).</p>
+<h3 id="bring-up"><a class="header" href="#bring-up">Bring up</a></h3>
+<p>The bring up function creates the deployment. The deployment is created in
+stages, with each stage corresponding to a subcommand of the <code>veraison</code> script.
+The bring up stages are:</p>
+<pre><code class="language-bash">veraison configure --init [...]
+veraison create-deb
+veraison create-key-pair
+
+veraison create-vpc-stack
+
+veraison create-sentinel-image
+veraison create-rds-stack
+veraison update-security-groups
+veraison setup-rds
+
+veraison create-signing-key
+
+veraison create-services-image
+veraison create-keycloak-image
+
+veraison create-services-stack
+</code></pre>
+<h4 id="configure"><a class="header" href="#configure">configure</a></h4>
+<p><code>configure</code> command is used to configure the deployment. It has optional
+arguments to specify individual configuration points for the deployment. (use
+<code>veraison configure --help</code> to list them). Configuration will be cached locally
+and used by subsequent commands.</p>
+<p>The <code>--init</code> flag indicates that this is an initial configuration for the
+deployment. Any arguments not specified by this command will be set to default
+values (or an error will be raised if no defaults exist). Without <code>--init</code> flag,
+only the specified parameters will configured (this can be used to update an
+existing configuration).</p>
+<h4 id="create-deb"><a class="header" href="#create-deb">create-deb</a></h4>
+<p>This is used to create a Debian package for Veraison services using the <a href="../debian">debian
+deployment</a>. This is used to create the services image later.</p>
+<h4 id="create-key-pair"><a class="header" href="#create-key-pair">create-key-pair</a></h4>
+<p>This creates an AWS key pair that will be used to configure access to EC2
+instances.</p>
+<h4 id="create-sentinel-image"><a class="header" href="#create-sentinel-image">create-sentinel-image</a></h4>
+<p>Creates an AMI image for the sentinel instance. The instance will be
+provisioned with its own version of <code>veraison</code> script which can be found
+<a href="misc/sentinel-commands">here</a>. The sentinel will be used to mediate access to
+the RDS instance, which will not be directly accessible outside the VPC.</p>
+<h4 id="create-rds-stack"><a class="header" href="#create-rds-stack">create-rds-stack</a></h4>
+<p>This creates the RDS and sentinel instances via a CloudFormation stack.</p>
+<h4 id="update-security-groups"><a class="header" href="#update-security-groups">update-security-groups</a></h4>
+<p>This updates the sentinel instance's security group with your current public IP
+address, which will enable SSH access to the instance. If your current address
+is covered by <code>VERAISON_AWS_ADMIN_CIDR</code>, then this can be skipped.</p>
+<p>If your ISP periodically changes your IP address, you may need to re-run this
+command in the future.</p>
+<h4 id="setup-rds"><a class="header" href="#setup-rds">setup-rds</a></h4>
+<p>This initializes the RDS instance for use by Veraison services.</p>
+<h4 id="create-signing-key"><a class="header" href="#create-signing-key">create-signing-key</a></h4>
+<p>Create a new signing key in JWK format and upload it to AWS Secrets Manager.</p>
+<h4 id="create-services-image-and-create-keycloak-image"><a class="header" href="#create-services-image-and-create-keycloak-image">create-services-image and create-keycloak-image</a></h4>
+<p>This creates AMI images that will be used by the various EC2 instances  in the
+deployment. Both of these need configuration for connecting to the RDS
+instance, which is why the must be created after <code>setup-rds</code>.</p>
+<h4 id="create-services-stack"><a class="header" href="#create-services-stack">create-services-stack</a></h4>
+<p>Finally, this creates the load balancers, auto-scaling groups, etc to complete
+the deployment. This also creates CNAME records for subdomains under the Route
+53 domain associated with the deployment.</p>
+<h3 id="teardown"><a class="header" href="#teardown">Teardown</a></h3>
+<p>Teardown, like bring up, invokes a number of <code>veraison</code> subcommands:</p>
+<pre><code class="language-bash">veraison delete-stack services
+veraison delete-stack rds
+veraison delete-stack vpc
+
+veraison delete-image keycloak
+veraison delete-image services
+veraison delete-image sentinel
+
+veraison delete-signing-key
+
+veraison delete-key-pair
+veraison delete-deb
+</code></pre>
+<p>This is more-or-less a reverse of what was done during bring up and should be
+self-explanatory.</p>
+<h2 id="managing-the-deployment"><a class="header" href="#managing-the-deployment">Managing the deployment</a></h2>
+<p>In addition to containing the commands used during deployment bring up and
+teardown, <code>veraison</code> script also acts as a CLI front-end for the deployment.</p>
+<pre><code class="language-bash">veraison status
+</code></pre>
+<p>This shows a brief overview of the current state of the deployment -- which
+images have been created, which stacks have been deployed, and the currently
+running instances.</p>
+<pre><code class="language-bash">veraison cache
+</code></pre>
+<p>This dumps the local cache associated with the deployment. This includes the
+settings configured earlier using <code>veraison configure</code>, as well as various
+outputs from bring up stages. Notably this contains <code>keycloak_admin_password</code>,
+which will allow you to log into the Keycloak web interface.</p>
+<pre><code class="language-bash">veraison stores
+</code></pre>
+<p>This shows the contents of the K-V stores used by the services. This includes
+endorsements and trust anchors provisioned via the provisioning API, and
+policies uploaded via the management API.</p>
+<pre><code class="language-bash">veraison clear-store
+</code></pre>
+<p>This will empty the stores of all existing values. This can be useful during
+testing.</p>
+<pre><code class="language-bash">veraison shell
+</code></pre>
+<p>This opens an interactive shell on the sentinel instance. This can be used to
+examine and debug the internal state of the deployment (aside from the API
+endpoints, the sentinel is the only thing accessible outside the VPC).</p>
+<pre><code class="language-bash">veraison dbshell
+</code></pre>
+<p>This opens an interactive Postgres shell on the RDS instance (via the
+sentinel). The instance is used both for the Veraison services' K-Stores
+(<code>veraison</code> database -- should be the default), and for Keycloak (<code>keycloak</code>
+database).</p>
+<pre><code class="language-bash">veraison follow [-s FROM] SERVICE_NAME
+</code></pre>
+<p>This outputs the last 10 minutes (by default) of logs from the specified
+service and continues to print out new log entries in (near) real-time until
+stopped with CTRL-C. How far back event history is printed can be changed via
+-s/--start option which can take either an absolute date (in one of the common
+formats) or relative time. E.g.</p>
+<pre><code class="language-bash"># follow VTS service going back 2 hours
+veraison follow -s 2h vts
+
+# follow verification events since yesterday
+veraison follow --start yesterday verification
+
+# follow provisioning events since 20th July 2024 (note the US date ordering)
+veraison follow --start 7/20/2024 provisioning
+veraison follow --start 2024-07-20 provisioning
+
+# follow VTS service going back 3 days
+veraison follow --start "3 days ago" provisioning
+
+</code></pre>
+<p>The maximum unit of time for relative time is weeks (e.g. <code>2w</code> or <code>2 weeks</code>). If
+you want a longer time period you have to convert it into days/weeks, or specify
+and absolute starting date.</p>
+<pre><code class="language-bash">veraison get-logs [-S SERVICE] [-s FROM] [-e TO] OUTPUT_DIRECTORY
+</code></pre>
+<p>This retrieves logs from CloudWatch and writes them to files in the specified
+output directory. The files are called <code>{service}-stdout.log</code>. If the output
+directory doesn't exist, it will be created (along with intermediate
+directories, if necessary). It's possible to specify a service using <code>-S</code>
+option, in which case only logs for the services will be obtained. The option
+may be specified multiple times. It is possible to restrict the time period for
+which the logs will be obtained using <code>-s/--start</code> and <code>-e/--end</code> options.
+Parameters for these options should be in the same format as for <code>--start</code>
+option for <code>follow</code> command (see above). There is also a shorter alias <code>logs</code> for
+this command. E.g.</p>
+<pre><code class="language-bash"># Obtain logs for all services writing them into files in "veraison-logs"
+# subdirectory under current directory (creating it if necessary).
+veraison get-logs ./veraison-logs
+
+
+# Obtain VTS log for today writing it into ./veraison-logs/vts-stdout.log
+veraison get-logs -S vts -s today veraison-logs
+
+# Obtain logs for provisioning and verification services spanning time
+# period from 10th December 2024 until yesterday
+veraison logs -S provisioning -S verification -s 2024-12-10 \
+     -e yesterday veraison-logs
+</code></pre>
+<p>As with <code>follow</code> command, the maximum time unit is weeks.</p>
+<pre><code class="language-bash">veraison delete-logs
+</code></pre>
+<p>Completely delete logs from CloudWatch. This is mostly useful for debugging.
+This command is also aliased as <code>clear-logs</code>.</p>
+<pre><code class="language-bash">veraison restart-cwagent
+</code></pre>
+<p>Restarts CloudWatch agent running on service EC2 instances. This is necessary
+if something happens to the log groups in CloudWatch -- the agent will not
+upload events until restarted. (note: <code>delete-logs</code> command does this
+automatically, so there is normally no need to use this command unless you,
+e.g., manually delete the log groups in AWS web console).</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../services/deployments/overview.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../services/deployments/debian.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../services/deployments/overview.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../services/deployments/debian.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/pagetoc.js"></script>
+        <script src="../../mermaid.min.js"></script>
+        <script src="../../mermaid-init.js"></script>
+
+
+    </div>
+    </body>
+</html>

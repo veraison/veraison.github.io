@@ -1,0 +1,653 @@
+<!DOCTYPE HTML>
+<html lang="en" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>native - Veraison Project</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../.././mdbook-admonish.css">
+        <link rel="stylesheet" href="../../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Veraison Project</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<style>
+.mdbook-alerts {
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  border-left: 0.25em solid var(--mdbook-alerts-color);
+}
+
+.mdbook-alerts > *:first-child {
+  margin-top: 0;
+}
+
+.mdbook-alerts > *:last-child {
+  margin-bottom: 0;
+}
+
+.mdbook-alerts-title {
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  line-height: 1;
+  color: var(--mdbook-alerts-color);
+  text-transform: capitalize;
+}
+
+.mdbook-alerts-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.2em;
+  background-color: currentColor;
+  -webkit-mask: no-repeat center / 100%;
+  mask: no-repeat center / 100%;
+  -webkit-mask-image: var(--mdbook-alerts-icon);
+  mask-image: var(--mdbook-alerts-icon);
+}
+
+.mdbook-alerts-note {
+  --mdbook-alerts-color: rgb(9, 105, 218);
+  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-tip {
+  --mdbook-alerts-color: rgb(26, 127, 55);
+  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-important {
+  --mdbook-alerts-color: rgb(130, 80, 223);
+  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-warning {
+  --mdbook-alerts-color: rgb(154, 103, 0);
+  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-caution {
+  --mdbook-alerts-color: rgb(207, 34, 46);
+  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
+}
+
+</style>
+<h1 id="native-deployment"><a class="header" href="#native-deployment">Native deployment</a></h1>
+<p>The native deployment builds and installs Veraison services on the current
+system using its native tools.</p>
+<h2 id="dependencies"><a class="header" href="#dependencies">Dependencies</a></h2>
+<p>To build Veraison services, you will need a Go toolchain, at least v1.22.
+If Go is already installed, you can check the version:</p>
+<pre><code class="language-sh">go version
+</code></pre>
+<p>If not, the instructions for downloading and installing Go on your platform can
+be found <a href="https://go.dev/dl/">here</a>.</p>
+<p>You will also need the protobuf compiler, <code>protoc</code>, with plugins for Go. The
+plugins may be installed via <code>go install</code>:</p>
+<pre><code class="language-bash">go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
+go install github.com/mitchellh/protoc-gen-go-json@latest
+</code></pre>
+<p>You will need GNU <code>make</code> (at least version 3.81) to drive the build process.</p>
+<p>The deployment script is written for <code>bash</code> shell, and relies on <code>envsubst</code>
+utility (which comes as part of <code>gettext</code> package on most systems), as well as
+some common UNIX utilities that are often already present on a system but may
+sometimes need to be installed: <code>find</code>, <code>grep</code>, <code>sed</code>.</p>
+<div class="mdbook-alerts mdbook-alerts-important">
+<p class="mdbook-alerts-title">
+  <span class="mdbook-alerts-icon"></span>
+  important
+</p>
+<p><strong>MacOSX users:</strong> To enable <code>envsubst</code> and force it to link properly:</p>
+<pre><code class="language-sh">brew install gettext
+brew link --force gettext
+</code></pre>
+</div>
+<p>For a full deployment, the following tools will also be needed:</p>
+<ul>
+<li><code>sqlite3</code> to initialize and manipulate the stores</li>
+<li><code>jq</code> to display the stores' contents</li>
+<li><code>openssl</code> (at least version 3.0) to generate the TLS certificates (not needed
+if you plan to use the included example certs).</li>
+<li><code>step</code> to generate the signing key (not needed if you plan to use the included
+example key).</li>
+<li><code>tmux</code> can optionally be used to run the deployment (not required).</li>
+</ul>
+<p>All except <code>step</code> should be available from package managers of most
+distributions. For installing <code>step</code>, please see <a href="https://smallstep.com/docs/step-cli/installation/">its
+documentation</a>.</p>
+<h3 id="bootstrap-scripts"><a class="header" href="#bootstrap-scripts">Bootstrap scripts</a></h3>
+<p>To simplify dependency installation, we have bootstrap scripts available for
+Arch, Ubuntu, and MacOSX (using <a href="https://brew.sh">homebrew</a>) (see <code>bootstrap/</code>
+subdirectory). Running</p>
+<pre><code class="language-bash">git clone https://github.com/veraison/services.git
+cd services/deployments/native
+
+make bootstrap
+</code></pre>
+<p>will try to automatically select the appropriate script to run.</p>
+<h3 id="checking-dependencies"><a class="header" href="#checking-dependencies">Checking dependencies</a></h3>
+<p>You can check whether the required dependencies are present by running</p>
+<pre><code class="language-bash">make check
+</code></pre>
+<p>This will report an error if a mandatory dependency is missing, or warnings if
+one or more optional dependencies are missing.</p>
+<h2 id="quick-deployment"><a class="header" href="#quick-deployment">Quick deployment</a></h2>
+<p>To get Veraison running quickly you can run</p>
+<pre><code class="language-bash">make quick-deploy
+</code></pre>
+<p>in this file's directory, or <code>make native-deploy</code> in the repo's top-level
+directory.</p>
+<p>This will create a deployment under <code>~/veraison-deployment</code> using the included
+example key and certificates.</p>
+<p>The deployment is controlled via a CLI frontend script,
+<code>~/veraison-deployment/bin/veraison</code>. You can create an alias for it so that it
+may be invoked simply as <code>veraison</code> by sourcing the deployments env file:</p>
+<pre><code class="language-bash">source ~/veraison-deployment/env/env.bash
+</code></pre>
+<p>(the command above assumes you're using <code>bash</code> shell; there is also an
+equivalent file for <code>zsh</code>).</p>
+<h2 id="running-veraison"><a class="header" href="#running-veraison">Running Veraison</a></h2>
+<p>You have three options for running the services:</p>
+<pre><code class="language-bash"># option 1
+veraison start-term
+
+</code></pre>
+<p>Will spawn a virtual terminal for each service.</p>
+<pre><code class="language-bash"># option 2
+export SESSION_NAME=veraison
+veraison start-tmux $SESSION_NAME
+</code></pre>
+<p>will create a tmux session with the specified name (if no name is specified,
+the default is "veraison"), and will start services inside panes within that
+session.  You can then attach to the session with</p>
+<pre><code class="language-bash">tmux attach -t $SESSION_NAME
+</code></pre>
+<p>Note that this requires that <code>tmux</code> is installed on the system.</p>
+<p>Finally</p>
+<pre><code class="language-bash"># option 3
+veraison start-services
+</code></pre>
+<p>will install and start systemd/launchd services for the current user.</p>
+<p>(Note: if you've deployed by running <code>make native-deploy</code> at top level, that will
+automatically try to start services via systemd/launchd on systems that use them.)</p>
+<h3 id="testing-the-deployment"><a class="header" href="#testing-the-deployment">Testing the deployment</a></h3>
+<p>You can check that Veraison is running properly by running through the
+<a href="https://github.com/veraison/services/blob/main/end-to-end/README.md">end-to-end flow</a>.</p>
+<h2 id="step-by-step-deployment"><a class="header" href="#step-by-step-deployment">Step-by-step deployment</a></h2>
+<p>There are multiple steps to creating a functioning Veraison deployment. <code>make quick-deploy</code> described above executes these steps in sequence with default
+options for minimal hassle.</p>
+<p>This section describes how to create a deployment by executing each step
+individually using the <code>deployment.sh</code> script, and the options available for
+each step.</p>
+<h3 id="deployment-destination"><a class="header" href="#deployment-destination">Deployment destination</a></h3>
+<p>The destination for the deployment is specified by <code>VERAISON_ROOT</code> environment
+variable. If the variable does not exist, it defaults to
+<code>~/veraison-deployment</code> (as seen above).</p>
+<pre><code class="language-bash">export VERAISON_ROOT=~/alternate-deployment
+</code></pre>
+<p>If the specified location does not exist, it will be created by the script.</p>
+<h3 id="step-1-build-veraison"><a class="header" href="#step-1-build-veraison">Step 1: build Veraison</a></h3>
+<p>Veraison services can be built with</p>
+<pre><code class="language-bash">./deployment.sh build
+</code></pre>
+<p>This is equivalent to running <code>make COMBINED_PLUGINS=1</code> at the top level. Note
+that <code>COMBINED_PLUGINS</code> must be set, as the deployment will not use split
+<code>-handler</code> plugins.</p>
+<h3 id="step-2-create-and-populate-deployment-directory"><a class="header" href="#step-2-create-and-populate-deployment-directory">Step 2: create and populate deployment directory</a></h3>
+<pre><code class="language-bash">./deployment.sh deploy
+</code></pre>
+<p>This create the deployment directory structure under <code>VERAISON_ROOT</code> (including
+the <code>VERAISON_ROOT</code> itself if it doesn't already exist) and will copy the
+service executables, (combined) plugins, the CLI frontend, and configuration
+into the directory structure.</p>
+<p>Alternatively, if you specify <code>-s</code> option:</p>
+<pre><code class="language-bash">./deployment.sh -s deploy
+</code></pre>
+<p>then the service executables and plugins will be symbolically linked, rather
+than copied. This is useful for development, so that you don't have keep
+re-copying the executables after rebuilding them.</p>
+<h3 id="step-3-set-up-tls-certificates"><a class="header" href="#step-3-set-up-tls-certificates">Step 3: set up TLS certificates</a></h3>
+<p>Veraison services communicate with clients and with each other over TLS. Each
+service will use its own certificate and associated key that it will pick up
+from <code>${VERAISON_ROOT}/certs/</code> based on its name (e.g. VTS service will use
+<code>${VERAISON_ROOT}/certs/vts.crt</code>.</p>
+<p>These certificates can be generated for a deployment by providing a root
+certificate that will be used to sign them. The root certificate maybe obtained
+from a known Certificate Authority (such as <a href="https://letsencrypt.org/getting-started/">Let's
+Encrypt</a>), or created locally (in
+which case, it will be self-signed).</p>
+<p>Certificate generation relies on <code>openssl</code> which must be installed on the
+system.</p>
+<h4 id="create-root-certificate"><a class="header" href="#create-root-certificate">Create root certificate</a></h4>
+<p>A root certificate may be created by running</p>
+<pre><code class="language-bash">./deployment.sh create-root-cert "/C=US/O=Acme Inc."
+</code></pre>
+<p>This will create <code>${VERAISON_ROOT}/certs/rootCA.crt</code> (and the associated
+<code>${VERAISON_ROOT}/certs/rootCA.key</code>) with the specified subject. The subject
+may be omitted from the invocation, in which case <code>/O=Veraison</code> will be used.</p>
+<h4 id="create-service-certificates"><a class="header" href="#create-service-certificates">Create service certificates</a></h4>
+<p>Once you have a root certificate (either generated in the sub-section above, or
+obtained via some other means), you can use it to generate certificates for the
+individual services.</p>
+<p>In addition to the root certificate and key, you will also need to specify a
+comma-separated list of names that will be used to populate the Common Name
+field and Subject Alternative Name extension in the generated certificates.</p>
+<pre><code class="language-bash">./deployment.sh init-certificates $(cat /etc/hostname),localhost \
+    ${VERAISON_ROOT}/certs/rootCA.crt ${VERAISON_ROOT}/certs/rootCA.key
+</code></pre>
+<p>If you only plan to use the services locally, it is sufficient to only provide
+"localhost" as the first argument.</p>
+<p>The names in the list may contain the placeholder <code>@@</code> that will be replaced
+with the name of the service.</p>
+<p>For example, if you specify the first argument as</p>
+<pre><code>@@.my-domain.com,@@-service.alt-domain.com,localhost
+</code></pre>
+<p>then the certificate generated for the VTS service  will contain the Subject</p>
+<pre><code>/CN=vts.my-domain.com
+</code></pre>
+<p>and the SAN extension with</p>
+<pre><code>DNS:vts.my-domain.com, DNS:vts-service.alt-domain.com, DNS:localhost
+</code></pre>
+<div class="mdbook-alerts mdbook-alerts-note">
+<p class="mdbook-alerts-title">
+  <span class="mdbook-alerts-icon"></span>
+  note
+</p>
+<p>if you're using your own root certificate rather than generating one as in
+sub-section above, you do not need to rename or copy it into
+<code>${VERAISON_ROOT}/certs/</code> -- this will be done as part of <code>init-certificates</code>
+command (the root cert key will not be copied as it won't be needed after
+service certificates are generated).</p>
+</div>
+<h4 id="using-example-certificates"><a class="header" href="#using-example-certificates">Using example certificates</a></h4>
+<p>It is also possible to just use included example certificates rather then
+generating new ones for the deployment (these will, obviously, only work for
+local use, as they won't be configured with your host's name).</p>
+<pre><code class="language-bash">./deployment.sh -e init-certificates
+</code></pre>
+<p>When doing this, you do not need to create/provide a root certificate.</p>
+<h3 id="step-4-set-up-signing-key"><a class="header" href="#step-4-set-up-signing-key">Step 4: set up signing key</a></h3>
+<p>The signing key should be provided as <code>${VERAISON_ROOT}/signing/skey.jwk</code>. It
+will be used by the verification service to sign attestation results. The key
+must be in <a href="https://www.rfc-editor.org/rfc/rfc7517">JWK format</a>.</p>
+<p>You can generate a new key for the deployment with</p>
+<pre><code class="language-bash">./deployment.sh init-signing-key
+</code></pre>
+<p>Signing key generation relies on <code>step</code> which must be installed on the system
+(see <a href="#dependencies">dependencies</a> section above).</p>
+<h4 id="using-example-signing-key"><a class="header" href="#using-example-signing-key">Using example signing key</a></h4>
+<p>As with certificates, it is possible use the example key instead of generating
+a new one:</p>
+<pre><code class="language-bash">./deployment.sh -e init-signing-key
+</code></pre>
+<h3 id="step-5-initialize-stores"><a class="header" href="#step-5-initialize-stores">Step 5: initialize stores</a></h3>
+<p>Veraison uses sqlite3 databases to store endorsements, trust anchors, and
+policies. When started, services will expect these database to be initialized
+with appropriate tables. This can be done by running</p>
+<pre><code class="language-bash">./deployment.sh init-stores
+</code></pre>
+<h3 id="step-6-set-up-clients"><a class="header" href="#step-6-set-up-clients">Step 6: set up clients</a></h3>
+<p>Veraison services can be interacted with via CLI applications, <code>cocli</code> for
+provisioning, <code>evcli</code> for verification, and <code>pocli</code> for policy management.</p>
+<p>These clients can be installed, along with appropriate configuration with</p>
+<pre><code class="language-bash">./deployment.sh init-clients
+</code></pre>
+<h4 id="using-existing-clients-with-the-deployment"><a class="header" href="#using-existing-clients-with-the-deployment">Using existing clients with the deployment</a></h4>
+<p>If you already <code>cocli</code> or other clients installed, you can use them, rather
+than the ones bundled with the deployment. You can use <code>--config</code> option
+to point to the deployment's config file for the client, e.g.</p>
+<pre><code class="language-bash">cocli --config ${VERAISON_ROOT}/config/cocli/config.yaml OTHER_ARGS...
+</code></pre>
+<p>To avoid having to specify the config file each time, you can copy the
+client-specific sub-directory into your <code>XDG_CONFIG_HOME</code> (usually
+<code>~/.config/</code>)</p>
+<pre><code class="language-bash">cp -r ${VERAISON_ROOT}/config/cocli ~/.config/
+cocli OTHER_ARGS...
+</code></pre>
+<p>(The examples above use <code>cocli</code> but the same goes for <code>evcli</code> and <code>pocli</code> as
+well.)</p>
+<h2 id="deployment-directory-structure"><a class="header" href="#deployment-directory-structure">Deployment directory structure</a></h2>
+<p>Once deployment has been created, <code>${VERAISON_ROOT}</code> has the following
+structure</p>
+<pre><code>.
+├── bin
+├── certs
+├── config
+├── env
+├── logs
+├── plugins
+├── signing
+├── stores
+└── systemd (or launchd)
+</code></pre>
+<h4 id="bin"><a class="header" href="#bin"><code>bin</code></a></h4>
+<p>This directory contains all executables associated with deployment, including
+the CLI frontend, services, and clients.</p>
+<p>(note: if the deployment was created with <code>-s</code> option, the service executables
+will in fact be symlinks to their source locations.)</p>
+<h4 id="config"><a class="header" href="#config"><code>config</code></a></h4>
+<p>This directory has a number of sub-directories, one for the services, and one
+for each client. Each subdirectory contains a <code>config.yaml</code> with associated
+configuration.</p>
+<h4 id="env"><a class="header" href="#env"><code>env</code></a></h4>
+<p>This directly contains env files that may be sourced by various shells in order
+to setup up the shell for use with the deployment (e.g. allowing the frontend
+to be invoked without specifying its full path).</p>
+<p>Currently, only <code>bash</code> and <code>zsh</code> are supported.</p>
+<h4 id="logs"><a class="header" href="#logs"><code>logs</code></a></h4>
+<p>This directory contains service logs.</p>
+<h4 id="plugins"><a class="header" href="#plugins"><code>plugins</code></a></h4>
+<p>This directly contains attestation scheme plugins.</p>
+<p>(note: if the deployment was crated with <code>-s</code> option, the plugins will in fact
+be symlinks to their source locations.)</p>
+<h4 id="signing"><a class="header" href="#signing"><code>signing</code></a></h4>
+<p>This directly contains <code>skey.jwk</code>, the key that will be used by the
+verification service to sign attestation results.</p>
+<h4 id="stores"><a class="header" href="#stores"><code>stores</code></a></h4>
+<p>This directory contains sqlite3 database for the endorsements, trust anchors,
+and policies stores.</p>
+<h4 id="systemd-linux-only"><a class="header" href="#systemd-linux-only"><code>systemd</code> (Linux only)</a></h4>
+<p>This directory contains systemd unit files for the Veraison services. It is
+split into two sub-directories: <code>system</code> and <code>user</code>. The latter contains units
+meant to be installed into the user-specific service manager (i.e. using
+<code>systemctl --user</code>).</p>
+<h4 id="launchd-macosx-only"><a class="header" href="#launchd-macosx-only"><code>launchd</code> (MacOSX only)</a></h4>
+<p>This directory contains launchd user agent files for the Veraison services.</p>
+<h2 id="setting-up-authentication-with-keycloak"><a class="header" href="#setting-up-authentication-with-keycloak">Setting up authentication with Keycloak</a></h2>
+<p>Authentication is disabled by default in the native deployment. To enable it,
+you first need to have the Keycloak authentication service running.</p>
+<h3 id="installing-and-configuring-keycloak"><a class="header" href="#installing-and-configuring-keycloak">Installing and configuring Keycloak</a></h3>
+<div class="mdbook-alerts mdbook-alerts-note">
+<p class="mdbook-alerts-title">
+  <span class="mdbook-alerts-icon"></span>
+  note
+</p>
+<p>Proper installation and setup of Keycloak is outside the scope of this
+README. Please refer to the <a href="https://www.keycloak.org/getting-started/getting-started-zip">Keycloak
+documentation</a>
+for complete installation instructions. The instructions below show how to get
+something running with minimal effort for local development and testing only.</p>
+</div>
+<p>Keycloak requires OpenJDK 21. This is not part of Veraison dependencies and is
+not installed as part of bootstrap. If you don't already have it on your
+system, you will need to install it.</p>
+<pre><code class="language-bash"># On Arch
+sudo pacman -S jdk21-openjdk
+
+# On Ubuntu
+sudo apt install openjdk-21-jdk
+</code></pre>
+<p>You will then need to make sure that <code>JAVA_HOME</code> points to it:</p>
+<pre><code class="language-bash">export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+</code></pre>
+<p>Pick an install destination (must exist), and download and extract Keycloak
+into it:</p>
+<pre><code class="language-bash">export INSTALL_DEST=${HOME}
+wget -O- https://github.com/keycloak/keycloak/releases/download/25.0.2/keycloak-25.0.2.tar.gz | \
+    tar xzf - -C ${INSTALL_DEST}
+export KEYCLOAK_ROOT=${INSTALL_DEST}/keycloak-25.0.2
+</code></pre>
+<p>Setup the new install to work with the deployment:</p>
+<pre><code class="language-bash">./deployment.sh setup-keycloak ${KEYCLOAK_ROOT} localhost \
+    ${VERAISON_ROOT}/certs/rootCA.{crt,key} 11111
+</code></pre>
+<p>The first argument to the <code>setup-keycloak</code> command is the root directory of the
+keycloak installation. The second argument is a comma-separated list of names
+that will be used in the certificate (in the listing above it's just
+"localhost"). The third and fourth arguments are the root certificate and its
+key that will be used to sign Keycloak's cert. This must be the same root cert
+that was used for the Veraison deployment (the listing above assumes that
+you've generated the root with <code>gen-root-cert</code> command as described above, if
+not, then adjust the paths as appropriate). The final argument is the port
+Keycloak will be listening on.</p>
+<p>The setup command will also generate a new key for the server, and copy the
+example Veraison realm into its data path.</p>
+<p>Finally, re-build, and start the server:</p>
+<pre><code class="language-bash">${KEYCLOAK_ROOT}/bin/kc.sh build
+${KEYCLOAK_ROOT}/bin/kc.sh start --import-realm
+</code></pre>
+<p>The <code>--import-realm</code> option will cause the server to import the <a href="https://github.com/veraison/services/blob/main/deployments/native/example/keycloak/veraison-realm.json">example
+veraison realm</a>.</p>
+<h3 id="create-veraison-realm"><a class="header" href="#create-veraison-realm">Create Veraison realm</a></h3>
+<p>If you imported the example realm when running the server, you do not need to
+do this step.</p>
+<ul>
+<li>Veraison will expect the realm containing its configuration to be called
+"veraison".</li>
+<li>This realm must define "manager" and "provisioner" roles.</li>
+<li>There must be at least one user associated with each role.</li>
+<li>There must be at least one client setup with Authentication Flow
+capabilities "Standard Flow" and "Direct Access Grants" enabled.</li>
+</ul>
+<p>Please refer to the <a href="https://www.keycloak.org/getting-started/getting-started-zip#_create_a_realm">Keycloak
+docs</a>
+for how to go about setting  up the above.</p>
+<h3 id="enable-authentication-in-the-deployment"><a class="header" href="#enable-authentication-in-the-deployment">Enable authentication in the deployment</a></h3>
+<p>Finally, enable authentication in the config files for services, cocli, and
+pocli inside the deployment. This just means uncommenting the relevant config.
+If you have set up a new veraison realm instead of using the example one, the
+config values will also need to be updated.</p>
+<h2 id="using-an-alternative-dbms"><a class="header" href="#using-an-alternative-dbms">Using an alternative DBMS</a></h2>
+<p>By default, the deployment will use <code>sqlite3</code> databases located under
+<code>${VERAISON_ROOT}/stores/</code> for key-value stores. It is possible to use either
+MySQL/MariaDB or Postgres instead.</p>
+<ol>
+<li>Ensure the relevant DBMS is installed and running. Please refer to the DBMS'
+and/or your OS' documentation for instructions on how to set that up.</li>
+<li>Create a user and a database for the deployment, and initialize k-v store
+tables for endorsements, trust anchors, and policies. Subdirectory
+<a href="https://github.com/veraison/services/tree/main/deployments/native/kvstore-backends">kvstore-backends</a> contains scripts to automate this step.</li>
+<li>Edit <code>*-store</code> entires inside <code>${VERAISON_ROOT}/config/services/config.yaml</code>
+to comment out the <code>sqlite3</code> config, and uncommenting config for the
+relevant driver (<code>pgx</code> for Postgres, and <code>mysql</code> for MySQL/MariaDB). You may
+also need to edit the uncommented settings to match your set up in the
+previous steps.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../services/deployments/docker.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../services/deployments/rpm.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../services/deployments/docker.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../services/deployments/rpm.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../theme/pagetoc.js"></script>
+        <script src="../../mermaid.min.js"></script>
+        <script src="../../mermaid-init.js"></script>
+
+
+    </div>
+    </body>
+</html>

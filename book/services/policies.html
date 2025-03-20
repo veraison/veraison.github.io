@@ -1,0 +1,482 @@
+<!DOCTYPE HTML>
+<html lang="en" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Policies - Veraison Project</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href=".././mdbook-admonish.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Veraison Project</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<style>
+.mdbook-alerts {
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  border-left: 0.25em solid var(--mdbook-alerts-color);
+}
+
+.mdbook-alerts > *:first-child {
+  margin-top: 0;
+}
+
+.mdbook-alerts > *:last-child {
+  margin-bottom: 0;
+}
+
+.mdbook-alerts-title {
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  line-height: 1;
+  color: var(--mdbook-alerts-color);
+  text-transform: capitalize;
+}
+
+.mdbook-alerts-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.2em;
+  background-color: currentColor;
+  -webkit-mask: no-repeat center / 100%;
+  mask: no-repeat center / 100%;
+  -webkit-mask-image: var(--mdbook-alerts-icon);
+  mask-image: var(--mdbook-alerts-icon);
+}
+
+.mdbook-alerts-note {
+  --mdbook-alerts-color: rgb(9, 105, 218);
+  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-tip {
+  --mdbook-alerts-color: rgb(26, 127, 55);
+  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-important {
+  --mdbook-alerts-color: rgb(130, 80, 223);
+  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-warning {
+  --mdbook-alerts-color: rgb(154, 103, 0);
+  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-caution {
+  --mdbook-alerts-color: rgb(207, 34, 46);
+  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
+}
+
+</style>
+<h1 id="policies"><a class="header" href="#policies">Policies</a></h1>
+<p>Policies allow tenants to perform additional evaluation of attestation
+evidence that is not covered by a particular attestation scheme. The policy can
+be used to override the overall attestation status and/or the trust vector
+values in the result (e.g. rejecting a token considered valid by the scheme if
+the more stringent constraints described in the policy are not met).</p>
+<div class="mdbook-alerts mdbook-alerts-note">
+<p class="mdbook-alerts-title">
+  <span class="mdbook-alerts-icon"></span>
+  note
+</p>
+<p>Policy administration framework is to be determined in the future. The
+short-term plan is to make this a part of the deployment flow, but a more
+complete policy admin flow may follow.</p>
+</div>
+<p>The syntax of the policy depends on the agent used to evaluate it. At the
+moment, the following policy agents are supported:</p>
+<p>"opa" -- <a href="https://www.openpolicyagent.org/">Open Policy Agent</a> is a flexible,
+generic Open Source policy agent that utilizes its own policy language called
+Rego. See <a href="README.opa.html">README.opa.md</a>.</p>
+<h2 id="configuration"><a class="header" href="#configuration">Configuration</a></h2>
+<p>Configuration for the policy agent is specified under top-level entry
+<code>po-agent</code>.</p>
+<h3 id="po-agent-configuration"><a class="header" href="#po-agent-configuration"><code>po-agent</code> configuration</a></h3>
+<p>The following policy agent configuration directives are currently supported:</p>
+<ul>
+<li><code>backend</code>: specified which policy backend will be used. Currently supported
+backends: <code>opa</code>.</li>
+<li><code>&lt;backend name&gt;</code>: an entry with the name of a backend is used to specify
+configuration for that backend. Multiple such entries may exist in a single
+config, but only the one for the backend specified by the <code>backend</code> directive
+will be used.</li>
+</ul>
+<h4 id="opa-backend-configuration"><a class="header" href="#opa-backend-configuration"><code>opa</code> backend configuration</a></h4>
+<p>Currently, <code>opa</code> backend does not support any configuration.</p>
+<h2 id="policy-identification"><a class="header" href="#policy-identification">Policy Identification</a></h2>
+<p>There are three different ways of identifying a policy:</p>
+<h3 id="appraisal-policy-id"><a class="header" href="#appraisal-policy-id">appraisal policy ID</a></h3>
+<p>This is an identifier used in the attestation result as defined by <a href="https://www.ietf.org/archive/id/draft-fv-rats-ear-01.html#name-ear-appraisal-claims">EAR
+Internet draft</a>.
+Note that in this case, "policy" is used in the sense of "Appraisal Policy for
+Evidence" as per <a href="https://www.rfc-editor.org/rfc/rfc9334">RATS architecture</a>.
+In Veraison, this encompasses both, the scheme, and the policy applied from the
+policy store by a policy engine.</p>
+<p>An appraisal policy ID is a <a href="https://www.rfc-editor.org/rfc/rfc3986">URI</a> with
+the scheme <code>policy</code> followed by a rootless path indicating the (RATS) policy
+using which the appraisal has been generated. The first segment of the path is
+the name of the scheme used to create the appraisal. The second segment, if
+present, is the individual policy ID (see below) of the policy that has been
+applied to the appraisal created by the scheme.</p>
+<p>For example:</p>
+<ul>
+<li><code>policy:TPM_ENACTTRUST</code>: the appraisal has been created using "TPM_ENACTTRUST" scheme, with
+no additional policy applied.</li>
+<li><code>policy:PSA_IOT/340d22f7-9eda-499f-9aa2-5af295d6d812</code>: the appraisal has been
+created using "PSA_IOT" scheme and has subsequently been updated by the
+policy with unique policy ID "ae19cc27-a449-1fb8-6c10-00f47ad1c55c".</li>
+</ul>
+<h4 id="potential-future-extensions"><a class="header" href="#potential-future-extensions">Potential future extensions</a></h4>
+<p>These indicate potential future enhancements, and are <strong>not</strong> supported by the
+current implementation.</p>
+<h5 id="cascading-policies"><a class="header" href="#cascading-policies">Cascading policies</a></h5>
+<p>In the future we may support applying multiple individual policies to a single
+appraisal. In that case, each path segment after the first (the scheme) is the
+individual policy ID of a policy that has been applied. The ordering of the
+segments matches the order in which the policies were applied.</p>
+<p>For example:</p>
+<ul>
+<li><code>policy:PSA_IOT/340d22f7-9eda-499f-9aa2-5af295d6d812/ae19cc27-a449-1fb8-6c10-00f47ad1c55c</code>:
+the appraisal has been created using "PSA_IOT" scheme, it was then updated by
+a policy with the individual policy id
+<code>340d22f7-9eda-499f-9aa2-5af295d6d812</code>, followed by a policy with the
+individual policy ID <code>ae19cc27-a449-1fb8-6c10-00f47ad1c55c</code>.</li>
+</ul>
+<h3 id="policy-store-key"><a class="header" href="#policy-store-key">policy store key</a></h3>
+<p>Policies are stored, retrieved from, and updated in the policy store using a key.
+The key is a string consisting of the tenant id, scheme, and policy name
+delimited by colons.</p>
+<p>For example:</p>
+<ul>
+<li><code>0:PSA_IOT:opa</code>: the key for tenant "0"'s policy for scheme "PSA_IOT" with
+name "opa".</li>
+</ul>
+<h4 id="policy-name"><a class="header" href="#policy-name">policy name</a></h4>
+<p>The name exists to support cascading policies in the future (see above). At the
+moment, as there is only one active policy allowed per appraisal, the name is
+not necessary and is always set to the name of the policy engine ("opa"). While
+this unnecessarily increases the key size and is somewhat wasteful, given that
+the number of the policies a typical deployment is expected to be, at most, in
+the hundreds, and the relatively negligible overhead compared to the size of
+the policies themselves, this is not deemed to be a major concern.</p>
+<h3 id="individual-policy-id"><a class="header" href="#individual-policy-id">individual policy ID</a></h3>
+<p>The individual policy ID identifies the specific policy that was applied to an
+appraisal. It forms a component of the appraisal policy ID (which also includes
+the scheme, and possibly, in the future, individual IDs from multiple
+policies). It differs from the policy store key in that it also incorporates
+versioning information.</p>
+<p>The individual policy id is the UUID of the specific policy instance.</p>
+<p>For example: <code>340d22f7-9eda-499f-9aa2-5af295d6d812</code></p>
+<h2 id="writing-policies"><a class="header" href="#writing-policies">Writing Policies</a></h2>
+<p>Please see the OPA <a href="https://www.openpolicyagent.org/docs/latest/">official
+documentation</a> for information on
+how to write Rego policies. This section describes what is necessary to
+implement a valid Veraison policy, and assumes a general familiarity with Rego.</p>
+<h3 id="package-declaration"><a class="header" href="#package-declaration">Package declaration</a></h3>
+<p>Your policy should specify <code>policy</code> as the package.</p>
+<pre><code class="language-rego">package policy
+</code></pre>
+<h3 id="evaluation-data"><a class="header" href="#evaluation-data">Evaluation Data</a></h3>
+<p>Data to be evaluated is defined as the following variables in the <code>policy</code>
+package:</p>
+<p><code>evidence</code> contains the JSON representation of <code>proto.EvidenceContext.Evidence</code>
+structure. This is the scheme-specific values extracted from the attestation
+token.</p>
+<p><code>endorsements</code> is an array of endorsement JSON objects. Their structure is
+scheme-specific.</p>
+<p><code>result</code> is a JSON object representing <code>proto.AttestationResult</code> that was
+generated by the scheme.</p>
+<p><code>scheme</code> is the name of the attestation scheme.</p>
+<h3 id="rules"><a class="header" href="#rules">Rules</a></h3>
+<p>You can update the attestation result by defining one or more of the following
+rules:</p>
+<ul>
+<li><code>status</code></li>
+<li><code>hw_authenticity</code></li>
+<li><code>sw_integrity</code></li>
+<li><code>sw_up_to_dateness</code></li>
+<li><code>config_integrity</code></li>
+<li><code>runtime_integrity</code></li>
+<li><code>certification_status</code></li>
+</ul>
+<p>The first overwrites the overall attestation result status. The subsequent rules
+overwrite the corresponding entries in the trust vector.</p>
+<p>The rules must be defined such that they produce the string <code>"SUCCESS"</code> if the
+conditions have been met, and the string <code>"FAILURE"</code> otherwise.</p>
+<p>As various versions are often represented using Semantic Versioning, <code>policy</code>
+package provides a utility function, <code>semver_cmp</code> to aid in their comparison
+(note: currently, pre-release suffixes are not supported).</p>
+<p>For example:</p>
+<pre><code class="language-rego">sw_integrity = "SUCCESS" {
+    # note: This is an example. The evidence entries do not correspond to any
+    #       actual scheme.
+    evidence["application-hash"] == "h0KPxSKAPTEGXnvOPPA/5HUJZjHl4Hu9eg/eYMTPJcc="
+    evidence["firmware-hash"] == "h0KPxSKAPTEGXnvOPPA/5HUJZjHl4Hu9eg/eYMTPJcc="
+    semver_cmp(evidence["firmware-version"], "1.2.0") &gt;= 0
+} else = "FAILURE"
+</code></pre>
+<h4 id="dealing-with-multiple-attestation-schemes"><a class="header" href="#dealing-with-multiple-attestation-schemes">Dealing With Multiple Attestation Schemes</a></h4>
+<p>If you expect your policy to be applied to inputs from multiple attestation
+schemes, you differentiate between them using the <code>format</code> variable defined by
+the <code>policy</code> package. For example you can define rules for each scheme, and
+then alias the generic rules above to one of them based on the value of the
+<code>format</code> variable. For example:</p>
+<pre><code class="language-rego">sw_up_to_dateness = psa_sw_up_to_dateness { format == "PSA_IOT" }
+             else = enacttrust_sw_up_to_dateness { format == "TPM_ENACTTRUST" }
+
+psa_sw_up_to_dateness = "SUCCESS" {
+    # ...
+} else = "FAILURE"
+
+enacttrust_sw_up_to_dateness = "SUCCESS" {
+    # ...
+} else = "FAILURE"
+</code></pre>
+<h3 id="example-policy"><a class="header" href="#example-policy">Example Policy</a></h3>
+<p>This is a example of a policy that sets the <code>SoftwareUpToDateness</code> value in the
+trust vector for <code>PSA_IOT</code> and <code>TPM_ENACTTRUST</code> schemes (neither scheme has
+built-in definition for software up-to-dateness, and so that entry is undefined
+in the results generated by the schemes).</p>
+<pre><code class="language-rego">package policy
+
+# Use the psa_sw_up_to_dateness rules iff the attestation format is PSA_IOT, and
+# to enacttrust_sw_up_to_dateness iff the format is TPM_ENACTTRUST, otherwise,
+# sw_up_to_dateness will remain undefined.
+sw_up_to_dateness = psa_sw_up_to_dateness { format == "PSA_IOT" }
+             else = enacttrust_sw_up_to_dateness { format == "TPM_ENACTTRUST" }
+
+# This sets sw-up-to-dateness trust vector value to success iff BL version is
+# 3.5 or greater, and to failure otherwise.
+psa_sw_up_to_dateness = "SUCCESS" {
+  # there exisists some i such that...
+  some i
+  # ...the i'th software component has type "BL", and...
+  evidence["psa-software-components"][i]["measurement-type"] == "BL"
+
+  # ...the version of this component is greater or equal to 3.5.
+  # (semver_cmp is defined by the policy package. It returns 1 if the first
+  # parameter is greater than the second, -1 if it is less than the second,
+  # and 0 if they are equal.)
+  semver_cmp(evidence["psa-software-components"][i].version, "3.5") &gt;= 0
+} else = "FAILURE" # unless the above condition is met, return "FAILURE"
+
+# Unlike the PSA token, the EnactTrust token does not include information about
+# multiple sofware componets and instead has a single "firmware" entry.
+enacttrust_sw_up_to_dateness = "SUCCESS" {
+  evidence["firmware"] &gt;= 8
+} else = "FAILURE"
+</code></pre>
+<h2 id="managing-policies"><a class="header" href="#managing-policies">Managing Policies</a></h2>
+<p>Policies can be added to, and later managed in, the service using <a href="https://github.com/veraison/pocli"><code>pocli</code>
+command line tool</a>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../services/schemes/dice.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../services/api/overview.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../services/schemes/dice.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../services/api/overview.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE HTML>
+<html lang="en" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Device and Supply Chain modelling - Veraison Project</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../../favicon.svg">
+        <link rel="shortcut icon" href="../../../favicon.png">
+        <link rel="stylesheet" href="../../../css/variables.css">
+        <link rel="stylesheet" href="../../../css/general.css">
+        <link rel="stylesheet" href="../../../css/chrome.css">
+        <link rel="stylesheet" href="../../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../../../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../../../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../.././mdbook-admonish.css">
+        <link rel="stylesheet" href="../../../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Veraison Project</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<style>
+.mdbook-alerts {
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  border-left: 0.25em solid var(--mdbook-alerts-color);
+}
+
+.mdbook-alerts > *:first-child {
+  margin-top: 0;
+}
+
+.mdbook-alerts > *:last-child {
+  margin-bottom: 0;
+}
+
+.mdbook-alerts-title {
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  line-height: 1;
+  color: var(--mdbook-alerts-color);
+  text-transform: capitalize;
+}
+
+.mdbook-alerts-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.2em;
+  background-color: currentColor;
+  -webkit-mask: no-repeat center / 100%;
+  mask: no-repeat center / 100%;
+  -webkit-mask-image: var(--mdbook-alerts-icon);
+  mask-image: var(--mdbook-alerts-icon);
+}
+
+.mdbook-alerts-note {
+  --mdbook-alerts-color: rgb(9, 105, 218);
+  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-tip {
+  --mdbook-alerts-color: rgb(26, 127, 55);
+  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-important {
+  --mdbook-alerts-color: rgb(130, 80, 223);
+  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-warning {
+  --mdbook-alerts-color: rgb(154, 103, 0);
+  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-caution {
+  --mdbook-alerts-color: rgb(207, 34, 46);
+  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
+}
+
+</style>
+<h1 id="device-and-supply-chain-modelling"><a class="header" href="#device-and-supply-chain-modelling">Device and Supply Chain modelling</a></h1>
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>This document sets out the accumulated knowledge and / or assumptions about:</p>
+<ul>
+<li>the evidence available within a device which can be used for attestation</li>
+<li>models for firmware release lifecycles</li>
+<li>observations on how multiple products may be released from a single source and the implications for provisioning data</li>
+</ul>
+<p>Why are these significant? The models here have driven the design of the Veraison system, in particular the way supply chain data is provisioned into the system and the Endorsement store is constructed to allow verification queries to access reference values to be used for evidence appraisal. Those design conclusions can be found in other documents.</p>
+<p>The Veraison project welcomes feedback from real world examples as to the accuracy of the models and assumptions used here. The project will be seeking confirmation on these models from industry partners. If you have views on these topics, please provide relevant commentary via a github issue or start a conversation on the Zulip channel.</p>
+<h2 id="device-evidence-classification"><a class="header" href="#device-evidence-classification">Device evidence classification</a></h2>
+<p>The evidence within an attestation report can be categorised into the following classes. These classes are not an exhaustive set of all types of evidence that may be found within a report but are those necessary for correlating evidence with endorsement / reference value queries.</p>
+<h3 id="trust-anchor"><a class="header" href="#trust-anchor">Trust Anchor</a></h3>
+<p>All devices are ASSUMED to contain a Trust Anchor (TA) or a descendant from a Trust Anchor. This is normally provisioned into the device at manufacturing time but may also be provisioned to the device on enrolling into a management structure. The TA takes the form of a key or a seed from which an Attestation signing key can be derived. The attestation report will contain information, referred to here as a Trust Anchor ID (TA-ID). A Verifier can use the TA-ID to locate an endorsement providing information on the public value of the relevant key to use to validate the signature on a report. The Trust Anchor may have unique-to-device or group scope (i.e. multiple devices contain the same trust anchor). The latter case has been used as one solution for privacy protection use cases.</p>
+<h3 id="hardware-group"><a class="header" href="#hardware-group">Hardware Group</a></h3>
+<p>A device MAY contain a Hardware Group ID that is presented in attestation evidence. This is an identifier, provisioned during manufacturing, which can be used to classify the SoC used within the device and will be the same for any devices built using that SoC. Although termed as a hardware ID, in fact this identifier will classify the immutable Root of Trust, being the un-modifiable and un-measured first boot component as well as the specific SoC hardware within the SoC. The identifier is a public value and has no security value, but aids classification for a verifier. If no Hardware Group ID is included within the attestation evidence then an equivalent group identifier can be provisioned into the verifier as a correlation to the Trust Anchor ID.</p>
+<h3 id="firmware"><a class="header" href="#firmware">Firmware</a></h3>
+<p>A device is ASSUMED to produce evidence allowing the set of loaded firmware components to be identified. In some cases the device may summarise all loaded components into a single version number. In other cases a full set of measurements and metadata may be be made available to identify the set of firmware components loaded.</p>
+<h3 id="workload"><a class="header" href="#workload">Workload</a></h3>
+<p>An attestation report may include a series of measurements for the purpose of describing the workload running on a device. While a Veraison based attestation service can be capable of verifying such a series, there may not be a standard model for the reference values needed for this work. The workload is normally also divorced from the TCB and may require verification data to be obtained from a different supply chain from that used for device verification. This classification is therefore excluded from the device modelling assumptions.</p>
+<h3 id="other-evidence"><a class="header" href="#other-evidence">Other Evidence</a></h3>
+<p>Other evidence may be contained within the Attestation Report that does not fall into the above categories. This evidence may need to be referenced as part of an evidence appraisal policy, but no additional classification for a group of evidence is known at the moment to affect the modelling of Endorsements for the project.</p>
+<p>Note: attestation reports may contain additional complexities to modelling evidence, such as having multiple attesters within a device or receiving an encrypted report. However, it is expected that these can be handled as precursors to report verification by deconstruction into core parts in a pre-verification pass.</p>
+<p>Diagram: relevant groupings for evidence</p>
+<p><img src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/veraison/docs/main/diagrams/tokens-model.puml" alt="Groupings" /></p>
+<p>Diagram: Known Tokens</p>
+<p><img src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/veraison/docs/main/diagrams/known-tokens.puml" alt="Diagram: Mapping known attestation tokens to the evidence classifications" /></p>
+<h2 id="firmware-lifecycles"><a class="header" href="#firmware-lifecycles">Firmware Lifecycles</a></h2>
+<p>Where an attestation report contains only a firmware version, the reference or "known good" value(s) specifying what the policy should compare the version with in order to make a determination of validity may need to be provisioned from the supply chain. Alternatively the handling of this value may be handled by alterations to the evidence appraisal policy.</p>
+<p>If the attestation report contains a set of measurements describing the loaded firmware components, the situation is more complex but can offer the opportunity for a policy to make more nuanced appraisal choices. This case requires that the supply chain provisions information to the verifier about released firmware items for use by the appraisal policy.</p>
+<p>At the same time, correlations can be established between firmware components and other evidence categories. This can be used to identify policy appraisals such as 'this hardware requires a certain set of firmware components to be trustworthy'.</p>
+<p>Correlations can also be established between different released versions of firmware releases as a component is upgraded or patched. This allows a policy to gain appraisal policies such as whether a device is running up to date firmware or whether a firmware component is marked as having some vulnerability. Note that a distinction is made between an Update as being more likely to involve multiple fixes or components released at one time while a patch is more likely to be only a single component change to address a specific issue.</p>
+<p>The project has considered multiple models for likely firmware component lifecycles over revised releases. These can be classified into the following categories:</p>
+<ul>
+<li>Model 1:
+<ul>
+<li>Updates: Release all components for whether changed or not (unchanged components have the same file released as on previous occasion)</li>
+<li>Patches: Release only the patched (changed) component</li>
+</ul>
+</li>
+<li>Model 2:
+<ul>
+<li>Updates: As model 1</li>
+<li>Patches: Release all components, only patch components will be changed unpatched components have the same file released as on previous occasion</li>
+</ul>
+</li>
+<li>Model 3:
+<ul>
+<li>Updates &amp; Patches: Always release all components; always rebuild all components whether changed or not.</li>
+<li>Note that if a vendor is following practices such as from <a href="https://reproducible-builds.org/">Reproducible Builds</a> then Models 2 &amp; 3 are equivalent.</li>
+</ul>
+</li>
+</ul>
+<p>Metadata can be added at any time to any released component via the provisioning system.</p>
+<p>Diagram: Firmware lifecycle models</p>
+<p><img src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/veraison/docs/main/diagrams/firmware-lifecycles.puml" alt="Diagram: Firmware lifecycle models" /></p>
+<h2 id="beware-clashes-from-multiple-products"><a class="header" href="#beware-clashes-from-multiple-products">Beware clashes from multiple products</a></h2>
+<p>The above classifications can be used to build a data model which will allow the relevant <strong>and related</strong> reference values / endorsements to be available for evidence appraisal. However, if a manufacturer releases multiple products using the same components <em>and</em> tokens from these products are handled by the same verification service, the creation of the data model must take into account these distinct products to avoid false lifecycle graphs. This is necessary to avoid, say, the implication that a firmware component is not up to date because a new release is available, which applies only to a different product. The concept of a product identity can be either created from a combination of evidence fields or be a created entity that is correlated to the TA-ID.</p>
+<p>Diagram: Multi Product Models</p>
+<p><img src="http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/veraison/docs/main/diagrams/mult-prods.puml" alt="Diagram: Multi product models" /></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../services/architecture.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../submods/docs/musings/queries.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../services/architecture.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../submods/docs/musings/queries.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr.min.js"></script>
+        <script src="../../../mark.min.js"></script>
+        <script src="../../../searcher.js"></script>
+
+        <script src="../../../clipboard.min.js"></script>
+        <script src="../../../highlight.js"></script>
+        <script src="../../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../../theme/pagetoc.js"></script>
+        <script src="../../../mermaid.min.js"></script>
+        <script src="../../../mermaid-init.js"></script>
+
+
+    </div>
+    </body>
+</html>

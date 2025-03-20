@@ -1,0 +1,743 @@
+<!DOCTYPE HTML>
+<html lang="en" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Extending CoRIM - Veraison Project</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./mdbook-admonish.css">
+        <link rel="stylesheet" href="theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Veraison Project</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<style>
+.mdbook-alerts {
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  border-left: 0.25em solid var(--mdbook-alerts-color);
+}
+
+.mdbook-alerts > *:first-child {
+  margin-top: 0;
+}
+
+.mdbook-alerts > *:last-child {
+  margin-bottom: 0;
+}
+
+.mdbook-alerts-title {
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  line-height: 1;
+  color: var(--mdbook-alerts-color);
+  text-transform: capitalize;
+}
+
+.mdbook-alerts-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.2em;
+  background-color: currentColor;
+  -webkit-mask: no-repeat center / 100%;
+  mask: no-repeat center / 100%;
+  -webkit-mask-image: var(--mdbook-alerts-icon);
+  mask-image: var(--mdbook-alerts-icon);
+}
+
+.mdbook-alerts-note {
+  --mdbook-alerts-color: rgb(9, 105, 218);
+  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-tip {
+  --mdbook-alerts-color: rgb(26, 127, 55);
+  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-important {
+  --mdbook-alerts-color: rgb(130, 80, 223);
+  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-warning {
+  --mdbook-alerts-color: rgb(154, 103, 0);
+  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-caution {
+  --mdbook-alerts-color: rgb(207, 34, 46);
+  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
+}
+
+</style>
+<h1 id="extending-corim"><a class="header" href="#extending-corim">Extending CoRIM</a></h1>
+<p><a href="https://datatracker.ietf.org/doc/draft-ietf-rats-corim/04">CoRIM
+specification</a>
+may be extended by CoRIM Profiles documented in other specifications at well
+defined points identified in the base CoRIM spec using CDDL extension sockets.
+CoRIM profiles may</p>
+<ol>
+<li>Introduce new data fields to certain objects.</li>
+<li>Further constrain allowed values for existing fields.</li>
+<li>Introduce new type choices for fields whose values can be one of several
+types.</li>
+</ol>
+<p>This implementation, likewise, allows dependent code to register extension
+types. This is done via three distinct extension mechanisms:</p>
+<ol>
+<li>
+<p>Structures that allow extensions embed an <code>Extensions</code> object, which allows
+registering a user-provided struct. The user-provided struct can extend
+their containing structures in two ways:</p>
+<ul>
+<li>the fields of the user-provided struct become additional fields in
+the containing structure.</li>
+<li>the user-provided struct may define additional constraints on the
+containing structure by defining an appropriate validation method for it.</li>
+</ul>
+<p>This corresponds to the map-extension sockets in the spec.</p>
+</li>
+<li>
+<p>Some fields may have values chosen from a set of pre-determined types (e.g., an
+instance ID may be either a UUID or UEID). These (mostly) correspond to
+type-choice sockets in the CoRIM spec. The set of allowed types for a field
+may be extended by registering a factory function for a new type, using the
+registration function associated with the type choice.</p>
+</li>
+<li>
+<p>A couple of type-choice sockets (<code>$tag-rel-type-choice</code>,
+<code>$corim-role-type-choice</code> and <code>$comid-role-type-choice</code>) define what, in
+effect, are extensible enums. They allow providing additional values, rather
+than types. This implementation provides registration functions for new
+values for those types.</p>
+</li>
+</ol>
+<div class="mdbook-alerts mdbook-alerts-note">
+<p class="mdbook-alerts-title">
+  <span class="mdbook-alerts-icon"></span>
+  note
+</p>
+<p>CoRIM also "imports" CDDL from the CoSWID spec. Some of
+these CoSWID CDDL definitions also feature extension sockets.
+However, as they are defined in a different spec and are implemented
+in the <a href="https://github.com/veraison/swid"><code>veraison/swid</code></a> library, they
+cannot be extended using the extension feature provided in the CoRIM library.
+The extension support in CoRIM library is applicable ONLY to CoRIM and CoMID
+maps and type choices</p>
+</div>
+<h2 id="map-extensions"><a class="header" href="#map-extensions">Map Extensions</a></h2>
+<p>Map extensions allow extending CoRIM and CoMID maps with additional keys,
+effectively defining new fields for the corresponding structures. In the code
+base, these can be identified by the embedded <code>Extensions</code> struct. Each
+extensible type has a corresponding <code>extensions.Point</code>. These are:</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center">Extended Type</th><th style="text-align: center">Extension Point(s)</th><th style="text-align: center">Parent Structure</th><th style="text-align: center">Where to Call RegisterExtensions()</th></tr></thead><tbody>
+<tr><td style="text-align: center">comid.Comid</td><td style="text-align: center">comid.ExtComid</td><td style="text-align: center">comid.Comid (the top-level CoMID)</td><td style="text-align: center">On a comid.Comid instance (e.g. myComid.RegisterExtensions(extMap))</td></tr>
+<tr><td style="text-align: center">comid.Entity</td><td style="text-align: center">comid.ExtEntity</td><td style="text-align: center">comid.Entity</td><td style="text-align: center">Usually indirect via myComid.RegisterExtensions(...) (the Comid sees it).</td></tr>
+<tr><td style="text-align: center">comid.Triples</td><td style="text-align: center">comid.ExtTriples</td><td style="text-align: center">comid.Triples</td><td style="text-align: center">Typically indirect via myComid.RegisterExtensions(...).</td></tr>
+<tr><td style="text-align: center">comid.Mval</td><td style="text-align: center">comid.ExtReferenceValue, comid.ExtEndorsedValue, comid.ExtMval</td><td style="text-align: center">comid.Mval (measurement-value in reference/endorsed)</td><td style="text-align: center">Usually indirect via myComid.RegisterExtensions(...).</td></tr>
+<tr><td style="text-align: center">comid.FlagsMap</td><td style="text-align: center">comid.ExtReferenceValueFlags, comid.ExtEndorsedValueFlags, comid.ExtFlags</td><td style="text-align: center">comid.FlagsMap</td><td style="text-align: center">Typically indirect via myComid.RegisterExtensions(...).</td></tr>
+<tr><td style="text-align: center">corim.UnsignedCorim</td><td style="text-align: center">corim.ExtUnsignedCorim</td><td style="text-align: center">corim.UnsignedCorim (the top-level CoRIM)</td><td style="text-align: center">On a corim.UnsignedCorim instance (e.g. myCorim.RegisterExtensions(...))</td></tr>
+<tr><td style="text-align: center">corim.Entity</td><td style="text-align: center">corim.ExtEntity</td><td style="text-align: center">corim.Entity</td><td style="text-align: center">Usually indirect via myCorim.RegisterExtensions(...).</td></tr>
+<tr><td style="text-align: center">corim.Signer</td><td style="text-align: center">corim.ExtSigner</td><td style="text-align: center">corim.Signer</td><td style="text-align: center">Usually indirect via myCorim.RegisterExtensions(...).</td></tr>
+</tbody></table>
+</div>
+<p>Note that <code>comid.Mval</code> and <code>comid.FlagsMap</code> are used for both reference values
+and endorsed values, which may be extended separately. This is why there are
+two extension points associated with each. Additionally, <code>comid.ExtMval</code> and
+<code>comid.ExtFlags</code> also exist when you want to register extensions with a
+<code>comid.Mval</code> or <code>comid.Measurment</code> (and so don't have the context of whether it
+will be going into a reference or an endorsed value).</p>
+<p>The diagram below shows a visual representation of where these extension points
+originate in the <code>struct</code> hierarchy, and which CoRIM object are "aware" of
+which extension points:</p>
+<p><img src="https://github.com/veraison/corim/raw/main/extensions/corim-map-extensions.png?" alt="map extensions" /></p>
+<p>(note: the diagram shows the logical relationships between structures and does
+not meant to accurately reflect the code -- e.g. it omits the container types,
+representing them as slices)</p>
+<p>To extend the above types, you need to define a struct containing your
+extensions for each extension point that you want to extend. You then need to
+create an <code>extensions.Map</code> that maps the extension points to a pointer to an
+instance of the corresponding struct. Finally, you need to pass  the map to the
+<code>RegisterExtensions()</code> method of an instance of the top-most type that is being
+extended. For example, if you want to extend the comid, reference values, and
+entities, you would create a struct defining the extensions for each, call
+<code>extensions.NewMap()</code> to create a new map, call <code>Add()</code> on the map to add
+mappings from the three extension points to pointers to empty instances of your
+structs, and, finally, pass the map to <code>comid.Comid.RegisterExtensions()</code>. This
+should be done as early as possible, before any marshaling is performed (see
+the example below).</p>
+<p>These types can be extended in two ways: by adding additional fields, and by
+introducing additional constraints over existing fields.</p>
+<h3 id="adding-new-fields"><a class="header" href="#adding-new-fields">Adding new fields</a></h3>
+<p>To add new fields, simply add them to your extensions struct, ensuring that
+the <code>cbor</code> and <code>json</code> tags on those fields are set correctly. As CoRIM
+mandates integer keys, you must use the <code>keyasint</code> option for the <code>cbor</code> tag.</p>
+<p>To access the values of those fields, you can call the extended type instance's
+<code>Extensions.Get()</code> passing in the name of the field you want to access. The
+name can be either the Go struct's field name, the name specified in the <code>json</code>
+tag, or (a string containing) the integer specified in the <code>cbor</code> tag.</p>
+<p><code>Get()</code> returns an <code>interface{}</code>. There are equivalent <code>GetInt()</code>,
+<code>GetString()</code>, etc. methods that perform the required conversions, and return
+the value of the indicated type, along with possible errors. ("Must" versions
+of these also exist, e.g. <code>MustGetString()</code>, that do not return an error and
+instead call <code>panic()</code>).</p>
+<p>You can also get the pointer to your extension's instance itself by calling
+the extended type instance's <code>GetExtensions()</code>. This returns an <code>interface{}</code>, so
+you will need to type assert to be able to access the fields directly.</p>
+<h3 id="introducing-additional-constraints"><a class="header" href="#introducing-additional-constraints">Introducing additional constraints</a></h3>
+<p>To introduce new constraints, add a method called <code>Constrain&lt;TYPE&gt;(v *&lt;TYPE&gt;)</code>
+to your extensions struct, where <code>&lt;TYPE&gt;</code> is the name of the type being
+extended (one of the ones listed above) -- e.g.
+<code>ConstrainComid(v *comid.Comid)</code> when extending <code>comid.Comid</code>. This method, if
+it exists, will be invoked inside the extended type instance's <code>Valid()</code>
+method, passing itself as the parameter.</p>
+<p>You do not need to define this method unless you actually want to enforce some
+constraints (i.e., if you just want to define additional fields).</p>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<p>The following example illustrates how to implement a map extension by extending
+<code>comid.Entity</code> with the following features:</p>
+<ol>
+<li>an optional "email" field</li>
+<li>additional constraint on the existing "name" field that it contains a
+valid UUID (note: since <code>NameEntry</code> is a type choice extensible, this can
+also be done by defining a new value type for <code>NameEntry</code> -- see the
+following section).</li>
+</ol>
+<pre><code class="language-go">package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+
+	"github.com/google/uuid"
+	"github.com/veraison/corim/comid"
+	"github.com/veraison/corim/extensions"
+)
+
+// the struct containing the extensions
+type EntityExtensions struct {
+    // a string field extension
+	Email string `cbor:"-1,keyasint,omitempty" json:"email,omitempty"`
+}
+
+// custom constraints for Entity
+func (o EntityExtensions) ConstrainEntity(val *comid.Entity) error {
+	_, err := uuid.Parse(val.EntityName.String())
+	if err != nil {
+		return fmt.Errorf("invalid UUID: %w", err)
+	}
+
+	return nil
+}
+
+var sampleText = `
+{
+      "name": "31fb5abf-023e-4992-aa4e-95f9c1503bfa",
+      "regid": "https://acme.example",
+      "email": "info@acme.com",
+      "roles": [
+        "tagCreator",
+        "creator",
+        "maintainer"
+      ]
+}
+`
+
+func main() {
+	var entity comid.Entity
+	extMap := extensions.NewMap().Add(comid.ExtEntity, &amp;EntityExtensions{})
+	entity.RegisterExtensions(extMap)
+
+	if err := json.Unmarshal([]byte(sampleText), &amp;entity); err != nil {
+		log.Fatalf("ERROR: %s", err.Error())
+	}
+
+	if err := entity.Valid(); err != nil {
+		log.Fatalf("failed to validate: %s", err.Error())
+	} else {
+		fmt.Println("validation succeeded")
+	}
+
+	// obtain the extension field value via a generic getter
+	email := entity.Extensions.MustGetString("email")
+	fmt.Printf("entity email: %s\n", email)
+
+	// retrive the extensions struct and get value via its field.
+	exts := entity.GetExtensions().(*EntityExtensions)
+	fmt.Printf("also entity email: %s\n", exts.Email)
+}
+</code></pre>
+<h3 id="profiles"><a class="header" href="#profiles">Profiles</a></h3>
+<p>Map extensions may be grouped into profiles. A profile is registered,
+associating an <code>eat.Profile</code> with an <code>extensions.Map</code>. A registered profile can
+be obtained by calling <code>corim.GetProfileManifest()</code>, which returns a <code>corim.ProfileManifest</code>
+object which can be used to obtain <code>corim.UnsignedCorim</code>, <code>corim.SignedCorim</code>
+and <code>comid.Comid</code> instances that have the associated extensions registered.
+<code>corim.UnmarshalUnsignedCorimFromCBOR()</code> will automatically look up a
+registered profile based on the <code>eat.Profile</code> in the provided data (there are
+corresponding functions for JSON and signed CoRIM).</p>
+<pre><code class="language-go">// define extensions
+type EntityExtensions struct {
+	Address *string `cbor:"-1,keyasint,omitempty" json:"address,omitempty"`
+}
+
+type RefValExtensions struct {
+	Timestamp *int `cbor:"-1,keyasint,omitempty" json:"timestamp,omitempty"`
+}
+
+
+// register profile
+func init() {
+	profileID, err := eat.NewProfile("http://example.com/example-profile")
+	if err != nil {
+		panic(err) // will not error, as the hard-coded string above is valid
+	}
+
+	extMap := extensions.NewMap().
+		Add(comid.ExtEntity, &amp;EntityExtensions{}).
+		Add(comid.ExtReferenceValue, &amp;RefValExtensions{})
+
+	if err := RegisterProfile(profileID, extMap); err != nil {
+		// will not error, assuming our profile ID is unique, and we've
+		// correctly set up the extensions Map above
+		panic(err)
+	}
+}
+
+
+// use the profile
+func main() {
+	buf, err := os.ReadFile("testcases/unsigned-example-corim.cbor")
+	if err != nil {
+		log.Fatalf("could not read corim file: %v", err)
+	}
+
+	// UnmarshalUnsignedCorimFromCBOR will detect the profile and ensure
+	// the correct extensions are loaded before unmarshalling
+	extractedCorim, err := UnmarshalUnsignedCorimFromCBOR(buf)
+	if err != nil {
+		log.Fatalf("could not unmarshal corim: %v", err)
+	}
+
+    // ...
+}
+
+</code></pre>
+<p>Please see <a href="../corim/example_profile_test.go">example_profile_test.go</a> for the complete
+example of creating and using CoRIM profiles.</p>
+<div class="mdbook-alerts mdbook-alerts-note">
+<p class="mdbook-alerts-title">
+  <span class="mdbook-alerts-icon"></span>
+  note
+</p>
+<p>Currently, only map extensions can be associated with profiles. Type choice
+and enum value extensions (described below) can only be registered globally.</p>
+</div>
+<h2 id="type-choice-extensions"><a class="header" href="#type-choice-extensions">Type Choice Extensions</a></h2>
+<p>Type Choice extensions allow specifying alternative types for existing CoRIM
+fields by defining a type that implements an appropriate interface and
+registering it with a CBOR tag.</p>
+<p>A type choice struct contains a single field, <code>Value</code>, that contains the actual
+object represented by the type choice. The <code>Value</code> implements an interface
+that is specific to the type choice and is derived from <code>ITypeChoiceValue</code>:</p>
+<pre><code class="language-go">type ITypeChoiceValue interface {
+	// String returns the string representation of the ITypeChoiceValue.
+	String() string
+	// Valid returns an error if validation of the ITypeChoiceValue fails,
+	// or nil if it succeeds.
+	Valid() error
+	// Type returns the type name of this ITypeChoiceValue implementation.
+	Type() string
+}
+</code></pre>
+<p>The following is the full list of type choice structs:</p>
+<ul>
+<li><code>comid.ClassID</code></li>
+<li><code>comid.CryptoKey</code></li>
+<li><code>comid.EntityName</code></li>
+<li><code>comid.Group</code></li>
+<li><code>comid.Instance</code></li>
+<li><code>comid.Mkey</code></li>
+<li><code>comid.SVN</code></li>
+<li><code>corim.EntityName</code></li>
+</ul>
+<p>To provide a new value type, the following is required:</p>
+<ol>
+<li>Define a type that implements the value interface for the type choice you
+want to extend. This interface is called <code>I&lt;NAME&gt;Value</code>,  where <code>&lt;NAME&gt;</code> is
+the name of the type choice type(e.g. <code>IClassIDValue</code>).  These interfaces
+always embed <code>ITypeChoiceValue</code> and possibly define additional methods.</li>
+<li>Create a factory function for your type, with the signature <code>func (any) (*&lt;NAME&gt;, error)</code>, where <code>&lt;NAME&gt;</code> is the name of the type choice type that
+will contain your value. (Note that the function must return a pointer to
+the container type choice struct, <em>not</em> to the value type you define.) This
+function should create an instance of your value type from the provided
+input and return a new type choice struct instance containing it. The range
+of valid inputs is up to you, however it <em>must</em> handle <code>null</code>, returning the
+<a href="https://go.dev/ref/spec#The_zero_value">zero-value</a> for your type in that
+case.</li>
+<li>Register your factory function with the CBOR tag for your new type by
+passing it to the registration function corresponding to the type choice
+struct. It will have the name <code>Register&lt;NAME&gt;Type</code>, where <code>&lt;NAME&gt;</code> is the
+name of the type choice struct that will contain your value (e.g.
+<code>RegisterClassIDType</code>).</li>
+</ol>
+<h3 id="example-1"><a class="header" href="#example-1">Example</a></h3>
+<p>The following example illustrates how to add a new type choice value
+implementation by extending the <code>CryptoKey</code> type to support DER values.</p>
+<pre><code class="language-go">package main
+
+import (
+	"crypto"
+	"crypto/x509"
+	"encoding/base64"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"log"
+
+	"github.com/veraison/corim/comid"
+)
+
+// the CBOR tag to be used for the new type
+var DerKeyTag = uint64(9999)
+
+// new implementation of ICryptoKeyValue type
+type TaggedDerKey []byte
+
+// The factory function for the new type
+func NewTaggedDerKey(k any) (*comid.CryptoKey, error) {
+	var b []byte
+	var err error
+
+	if k == nil {
+		k = *new([]byte)
+	}
+
+	switch t := k.(type) {
+	case []byte:
+		b = t
+	case string:
+		b, err = base64.StdEncoding.DecodeString(t)
+		if err != nil {
+			return nil, err
+		}
+	default:
+		return nil, fmt.Errorf("value must be a []byte; found %T", k)
+	}
+
+	key := TaggedDerKey(b)
+
+	return &amp;comid.CryptoKey{Value: key}, nil
+}
+
+func (o TaggedDerKey) String() string {
+	return base64.StdEncoding.EncodeToString(o)
+}
+
+func (o TaggedDerKey) Valid() error {
+	_, err := o.PublicKey()
+	return err
+}
+
+func (o TaggedDerKey) Type() string {
+	return "pkix-der-key"
+}
+
+func (o TaggedDerKey) PublicKey() (crypto.PublicKey, error) {
+	if len(o) == 0 {
+		return nil, errors.New("key value not set")
+	}
+
+	key, err := x509.ParsePKIXPublicKey(o)
+	if err != nil {
+		return nil, fmt.Errorf("unable to parse public key: %w", err)
+	}
+
+	return key, nil
+}
+
+var testKeyJSON = `
+{
+	"type": "pkix-der-key",
+	"value": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEW1BvqF+/ry8BWa7ZEMU1xYYHEQ8BlLT4MFHOaO+ICTtIvrEeEpr/sfTAP66H2hCHdb5HEXKtRKod6QLcOLPA1Q=="
+}
+`
+
+func main() {
+    // register the factory function under the CBOR tag.
+	if err := comid.RegisterCryptoKeyType(DerKeyTag, NewTaggedDerKey); err != nil {
+		log.Fatal(err)
+	}
+
+	var key comid.CryptoKey
+
+	if err := json.Unmarshal([]byte(testKeyJSON), &amp;key); err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("Decoded DER key: %x\n", key)
+}
+</code></pre>
+<h2 id="enum-extensions"><a class="header" href="#enum-extensions">Enum extensions</a></h2>
+<p>The following enum types may be extended with additional values:</p>
+<ul>
+<li><code>comid.Rel</code></li>
+<li><code>comid.Role</code></li>
+<li><code>corim.Role</code></li>
+</ul>
+<p>This can be done by calling <code>RegisterRel</code> or <code>RegisterRole</code>, as appropriate,
+and providing a new <code>uint64</code> value and corresponding <code>string</code> name.</p>
+<h3 id="example-2"><a class="header" href="#example-2">Example</a></h3>
+<pre><code class="language-go">package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+
+	"github.com/veraison/corim/comid"
+)
+
+var sampleText = `
+{
+      "name": "Acme Ltd.",
+      "regid": "https://acme.example",
+      "roles": [
+        "tagCreator",
+        "owner"
+      ]
+}
+`
+
+func main() {
+    // associate role value 4 with the name "owner"
+	comid.RegisterRole(4, "owner")
+
+	var entity comid.Entity
+
+	if err := json.Unmarshal([]byte(sampleText), &amp;entity); err != nil {
+		log.Fatalf("ERROR: %s", err.Error())
+	}
+
+	if err := entity.Valid(); err != nil {
+		log.Fatalf("failed to validate: %s", err.Error())
+	} else {
+		fmt.Println("validation succeeded")
+	}
+
+	fmt.Println("roles:")
+	for _, role := range entity.Roles {
+		fmt.Printf("\t%s\n", role.String())
+	}
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="provisioning.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="attestation_result.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="provisioning.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="attestation_result.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="theme/pagetoc.js"></script>
+        <script src="mermaid.min.js"></script>
+        <script src="mermaid-init.js"></script>
+
+
+    </div>
+    </body>
+</html>

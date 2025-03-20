@@ -1,0 +1,687 @@
+<!DOCTYPE HTML>
+<html lang="en" class="navy sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Configuration - Veraison Project</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href=".././mdbook-admonish.css">
+        <link rel="stylesheet" href="../theme/pagetoc.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Veraison Project</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+<style>
+.mdbook-alerts {
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  border-left: 0.25em solid var(--mdbook-alerts-color);
+}
+
+.mdbook-alerts > *:first-child {
+  margin-top: 0;
+}
+
+.mdbook-alerts > *:last-child {
+  margin-bottom: 0;
+}
+
+.mdbook-alerts-title {
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  line-height: 1;
+  color: var(--mdbook-alerts-color);
+  text-transform: capitalize;
+}
+
+.mdbook-alerts-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.2em;
+  background-color: currentColor;
+  -webkit-mask: no-repeat center / 100%;
+  mask: no-repeat center / 100%;
+  -webkit-mask-image: var(--mdbook-alerts-icon);
+  mask-image: var(--mdbook-alerts-icon);
+}
+
+.mdbook-alerts-note {
+  --mdbook-alerts-color: rgb(9, 105, 218);
+  /* https://icon-sets.iconify.design/material-symbols/info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11q-.425 0-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8q0 .425.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20m0-8"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-tip {
+  --mdbook-alerts-color: rgb(26, 127, 55);
+  /* https://icon-sets.iconify.design/material-symbols/lightbulb-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 22q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-3-3q-.425 0-.712-.288T8 18q0-.425.288-.712T9 17h6q.425 0 .713.288T16 18q0 .425-.288.713T15 19zm-.75-3q-1.725-1.025-2.738-2.75T4.5 9.5q0-3.125 2.188-5.312T12 2q3.125 0 5.313 2.188T19.5 9.5q0 2.025-1.012 3.75T15.75 16zm.6-2h6.3q1.125-.8 1.738-1.975T17.5 9.5q0-2.3-1.6-3.9T12 4Q9.7 4 8.1 5.6T6.5 9.5q0 1.35.613 2.525T8.85 14M12 14"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-important {
+  --mdbook-alerts-color: rgb(130, 80, 223);
+  /* https://icon-sets.iconify.design/material-symbols/chat-info-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m0 8q.425 0 .713-.288T13 14v-4q0-.425-.288-.712T12 9q-.425 0-.712.288T11 10v4q0 .425.288.713T12 15m-6 3l-2.3 2.3q-.475.475-1.088.213T2 19.575V4q0-.825.588-1.412T4 2h16q.825 0 1.413.588T22 4v12q0 .825-.587 1.413T20 18zm-.85-2H20V4H4v13.125zM4 16V4z"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-warning {
+  --mdbook-alerts-color: rgb(154, 103, 0);
+  /* https://icon-sets.iconify.design/material-symbols/warning-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M2.725 21q-.275 0-.5-.137t-.35-.363q-.125-.225-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3q.25 0 .488.125t.387.375l9.25 16q.15.25.138.513t-.138.487q-.125.225-.35.363t-.5.137zm1.725-2h15.1L12 6zM12 18q.425 0 .713-.288T13 17q0-.425-.288-.712T12 16q-.425 0-.712.288T11 17q0 .425.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10q-.425 0-.712.288T11 11v3q0 .425.288.713T12 15m0-2.5"%2F%3E%3C%2Fsvg%3E');
+}
+
+.mdbook-alerts-caution {
+  --mdbook-alerts-color: rgb(207, 34, 46);
+  /* https://icon-sets.iconify.design/material-symbols/brightness-alert-outline-rounded/ */
+  --mdbook-alerts-icon: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.712T12 15q-.425 0-.712.288T11 16q0 .425.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7q-.425 0-.712.288T11 8v4q0 .425.288.713T12 13m-3.35 7H6q-.825 0-1.412-.587T4 18v-2.65L2.075 13.4q-.275-.3-.425-.662T1.5 12q0-.375.15-.737t.425-.663L4 8.65V6q0-.825.588-1.412T6 4h2.65l1.95-1.925q.3-.275.663-.425T12 1.5q.375 0 .738.15t.662.425L15.35 4H18q.825 0 1.413.588T20 6v2.65l1.925 1.95q.275.3.425.663t.15.737q0 .375-.15.738t-.425.662L20 15.35V18q0 .825-.587 1.413T18 20h-2.65l-1.95 1.925q-.3.275-.662.425T12 22.5q-.375 0-.737-.15t-.663-.425zm.85-2l2.5 2.5l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18zm2.5-6"%2F%3E%3C%2Fsvg%3E');
+}
+
+</style>
+<h1 id="configuration"><a class="header" href="#configuration">Configuration</a></h1>
+<p>Configuration for Veraison services is specified in YAML format. By default,
+each executable will try to read configuration from a file called <code>config.yaml</code>
+in that executable's current working directory (i.e. the directory it was
+launched from -- not the directory the executable itself is located). An
+alternative configuration file may be specified using <code>--config</code> option when
+launching the executable.</p>
+<h2 id="deployment-configuration"><a class="header" href="#deployment-configuration">Deployment configuration</a></h2>
+<p>Services configured to run as part of a deployment (e.g. via systemd units)
+will typically look for configuration in <code>config/services/config.yaml</code> under
+the deployment's location. For example, services installed via <code>deb</code> or <code>rpm</code>
+packages will have their configuration inside
+<code>/opt/veraison/config/services/config.yaml</code>.</p>
+<p>For <code>docker</code> and <code>aws</code> deployments, you normally shouldn't be modifying the
+configuration inside the containers/EC2 instances directly. Please refer to the
+deployments' documentation for information on how they may be configured.</p>
+<h2 id="top-level-entries"><a class="header" href="#top-level-entries">Top-level entries</a></h2>
+<p>The following top-level entries will be read for the config file:</p>
+<ul>
+<li><code>auth</code>: authentication configuration (used by management and provisioning
+services)</li>
+<li><code>ear-signer</code>: EAR signer configuration (used by vts service)</li>
+<li><code>en-store</code>: endorsements key-value store configuration (used by vts service)</li>
+<li><code>logging</code>: logging configuration (used by all services)</li>
+<li><code>management</code>: management REST API service configuration (used by management
+service)</li>
+<li><code>plugin</code>: plugin loader configuration (used by vts and management services)</li>
+<li><code>provisioning</code>: provisioning REST API service configuration (used by
+provisioning service)</li>
+<li><code>po-store</code>: policy key-value store configuration (used by vts and management
+services)</li>
+<li><code>sessionmanager</code>: verification service's session manager configuration (used
+by verification service)</li>
+<li><code>ta-store</code>: trust anchors key-value store configuration (used by vts service)</li>
+<li><code>verification</code>: verification REST API service configuration (used by
+verification service)</li>
+<li><code>vts</code>: Veraison Trusted Services configuration (used by vts service)</li>
+</ul>
+<p>Each service executable will only look for the top-level entries it expects and
+will ignore the rest.</p>
+<h3 id="auth-configuration"><a class="header" href="#auth-configuration"><code>auth</code> configuration</a></h3>
+<p>See <a href="#authentication-configuration">Authentication configuration</a> below.</p>
+<h3 id="ear-signer-configuration"><a class="header" href="#ear-signer-configuration"><code>ear-signer</code> configuration</a></h3>
+<ul>
+<li><code>alg</code>: the <a href="https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms">JWS algorithm</a>
+used for signing, e.g.: <code>ES256</code>, <code>RS512</code>.</li>
+<li><code>key</code>: URL with the location of the private key to be used with <code>alg</code>. The
+following URL schems are supported:
+<ul>
+<li><code>file</code>: URL path is the path to a local file</li>
+<li><code>aws</code>: URL path is in the form <code>&lt;region&gt;:&lt;secret-name&gt;</code> where <code>&lt;region&gt;</code>
+is an AWS region, and <code>&lt;secrete-name&gt;</code> is the name under which the key is
+stored in AWS Secrets Manager.
+If a scheme is not specified, <code>file</code> is assumed.
+The key is in <a href="https://datatracker.ietf.org/doc/rfc7517/">JWK format</a>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="en-store-configuration"><a class="header" href="#en-store-configuration"><code>en-store</code> configuration</a></h3>
+<p>See <a href="#kv-store-configuration">KV Store configuration</a> below.</p>
+<h3 id="logging-configuration"><a class="header" href="#logging-configuration"><code>logging</code> configuration</a></h3>
+<ul>
+<li><code>level</code> (optional): specify the minimum enabled logging level. Supported
+values (from lowest to highest) are: <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>.
+Defaults to <code>info</code>.</li>
+<li><code>format</code> (optional): specify the format of the log records (e.g. which
+entries appear in it). Currently supported formats:<br />
+<code>production</code>:  default <code>zap</code> production config.<br />
+<code>development</code>: default <code>zap</code> development config.<br />
+<code>bare</code>: a relatively bare format, featuring only log level (colored), logger
+name, and its message, suffixed with any fields.</li>
+<li><code>development</code> (optional): set to <code>true</code> to put the logger into development
+mode. This changes the behavior of <code>DPanic</code> and takes stacktraces more
+liberally.</li>
+<li><code>disable-stacktrace</code> (optional): set to <code>true</code> to completely disable
+automatic stacktrace capturing.</li>
+<li><code>sampling</code> (optional): set the sampling policy. There are two possible
+sub-settings: <code>initial</code> and <code>thereafter</code>, each is an integer value. <code>initial</code>
+specifies how many messages, of a given level, will be logged as-is every
+second. After than, only every <code>thereafter</code>'th message will be logged within
+that seconds. e.g.
+<pre><code class="language-yaml">  sampling:
+    initial: 10
+    thereafer: 5
+</code></pre>
+means, for very level (debug, info, etc) log the first 10 messages that occur
+in 1 second. If more messages occur within the second, log every 5th message
+after the first 10.</li>
+<li><code>encoding</code> (optional): specifies logger encoding. Supported values:
+<code>console</code>, <code>json</code>.</li>
+<li><code>output-paths</code> (optional): a list of URLs or file paths to write logging
+output to. By default, output is written to <code>stdout</code> (which may also be
+specified as a "path" along other locations). In case the same configuration
+is used by multiple services, you can insert <code>"{{ .service }}"</code> somewhere in
+paths (part from  <code>stdout</code>/<code>stderr</code>) to have different services log into
+different files.</li>
+<li><code>err-output-paths</code> (optional): a list of URLs or file paths to write internal
+logger errors to (note: <em>not</em> the error-level logging output). Defaults to
+<code>stderr</code>. In case the same configuration is used by multiple services, you
+can insert <code>"{{ .service }}"</code> somewhere in paths (part from
+<code>stdout</code>/<code>stderr</code>) to have different services log into different files.</li>
+<li><code>initial-fields</code> (optional): a map of key-value fields to add to
+log records (in addition to those added by specific logging sites).</li>
+</ul>
+<h3 id="management-configuration"><a class="header" href="#management-configuration"><code>management</code> configuration</a></h3>
+<ul>
+<li><code>listen-addr</code> (optional): the address, in the form <code>&lt;host&gt;:&lt;port&gt;</code> the
+management server will be listening on. If not specified, this defaults to
+<code>localhost:8088</code>.</li>
+<li><code>protocol</code> (optional): the protocol that will be used. Must be either "http" or "https". Defaults to "https" if not specified.</li>
+<li><code>cert</code>: path to the x509 certificate to be used. Must be specified if protocol is "https"</li>
+<li><code>cert-key</code>: path to the key associated with the certificate specified in <code>cert</code>. Must be specified if protocol is "https"</li>
+</ul>
+<h3 id="plugin-configuration"><a class="header" href="#plugin-configuration"><code>plugin</code> configuration</a></h3>
+<p>The following directives are currently supported:</p>
+<ul>
+<li><code>backend</code>: specifies which plugin mechanism will be used. Currently the only
+supported plugin backend is <code>go-plugin</code>.</li>
+<li><code>&lt;backend name&gt;</code> (in practice, just <code>go-plugin</code>): configuration specific to
+the backend.</li>
+<li><code>builtin</code>: configuration used when plugins are disabled and scheme-specific
+functionally is compiled into the VTS service executable. (Currently just a
+place-holder as there is no configuration for the built-in loading mechanism.)
+Note: enabling or disabling of plugins is a build-time option. It is not
+possible to do so via configuration.</li>
+</ul>
+<h4 id="go-plugin-backend-configuration"><a class="header" href="#go-plugin-backend-configuration"><code>go-plugin</code> backend configuration</a></h4>
+<ul>
+<li><code>dir</code>: path to the directory that will be scanned for plugin executables.</li>
+</ul>
+<h3 id="po-store-configuration"><a class="header" href="#po-store-configuration"><code>po-store</code> configuration</a></h3>
+<p>See <a href="#kv-store-configuration">KV Store configuration</a> below.</p>
+<h3 id="po-agent-configuration"><a class="header" href="#po-agent-configuration"><code>po-agent</code> configuration</a></h3>
+<p>The following policy agent configuration directives are currently supported:</p>
+<ul>
+<li><code>backend</code>: specified which policy backend will be used. Currently supported
+backends: <code>opa</code>.</li>
+<li><code>&lt;backend name&gt;</code>: an entry with the name of a backend is used to specify
+configuration for that backend. Multiple such entries may exist in a single
+config, but only the one for the backend specified by the <code>backend</code> directive
+will be used.</li>
+</ul>
+<h4 id="opa-backend-configuration"><a class="header" href="#opa-backend-configuration"><code>opa</code> backend configuration</a></h4>
+<p>Currently, <code>opa</code> backend does not support any configuration.</p>
+<h3 id="provisioning-configuration"><a class="header" href="#provisioning-configuration"><code>provisioning</code> configuration</a></h3>
+<ul>
+<li><code>listen-addr</code> (optional): the address, in the form <code>&lt;host&gt;:&lt;port&gt;</code> the provisioning
+server will be listening on. If not specified, this defaults to
+<code>localhost:8443</code>.</li>
+<li><code>protocol</code> (optional): the protocol that will be used. Must be either "http" or "https". Defaults to "https" if not specified.</li>
+<li><code>cert</code>: path to the x509 certificate to be used. Must be specified if protocol is "https"</li>
+<li><code>cert-key</code>: path to the key associated with the certificate specified in <code>cert</code>. Must be specified if protocol is "https"</li>
+</ul>
+<h3 id="sessionmanager-configuration"><a class="header" href="#sessionmanager-configuration"><code>sessionmanager</code> configuration</a></h3>
+<p>Session manager has a single configuration point: <code>backend</code>. This specifies
+which <code>ISessionManager</code> implementation will be used. The following backends are
+supported:</p>
+<ul>
+<li><code>ttlcache</code>: the default; this creates the session cache in memory of the
+<code>verification-service</code> process.</li>
+<li><code>memcached</code>: uses an external <a href="https://www.memcached.org/">memcached</a> server.</li>
+</ul>
+<p>All other entries under <code>sessionmanager</code> must be backend names (i.e. <code>ttlcache</code>
+or <code>memcached</code>), providing backend-specific configuration. Only configuration
+for the backend selected by <code>backend</code> entry will actually be used.</p>
+<h4 id="ttlcache-backend"><a class="header" href="#ttlcache-backend"><code>ttlcache</code> backend</a></h4>
+<p><code>ttlcache</code> backend does not have any configuration points.</p>
+<h4 id="memcached-backend"><a class="header" href="#memcached-backend"><code>memcached</code> backend</a></h4>
+<p><code>memcached</code> backend has the following configuration points:</p>
+<ul>
+<li><code>servers</code> (optional): a list of servers in "<host>:<port>" format that will
+be used by the backend. The servers will be used with equal weight. Adding
+the same entry multiple times increases its weight. If this is not specified,
+it will default to <code>["localhost:11211"]</code>.</li>
+</ul>
+<h3 id="ta-store-configuration"><a class="header" href="#ta-store-configuration"><code>ta-store</code> configuration</a></h3>
+<p>See <a href="#kv-store-configuration">KV Store configuration</a> below.</p>
+<h3 id="verification-configuration"><a class="header" href="#verification-configuration"><code>verification</code> configuration</a></h3>
+<ul>
+<li><code>listen-addr</code> (optional): the address, in the form <code>&lt;host&gt;:&lt;port&gt;</code> the verification
+server will be listening on. If not specified, this defaults to
+<code>localhost:8080</code>.</li>
+<li><code>protocol</code> (optional): the protocol that will be used. Defaults to "https" if not specified. Must be either "http" or "https".</li>
+<li><code>cert</code>: path to the x509 certificate to be used. Must be specified if protocol is "https"</li>
+<li><code>cert-key</code>: path to the key associated with the certificate specified in <code>cert</code>. Must be specified if protocol is "https"</li>
+</ul>
+<h3 id="vts-configuration"><a class="header" href="#vts-configuration"><code>vts</code> configuration</a></h3>
+<ul>
+<li><code>server-addr</code> (optional): address of the VTS server in the form
+<code>&lt;host&gt;:&lt;port&gt;</code>. If not specified, this defaults to <code>127.0.0.1:50051</code>. Unless
+<code>listen-addr</code> is specified (see below), VTS server will extract the port to
+listen on from this setting (but will listen on all local interfaces)</li>
+<li><code>listen-addr</code> (optional): The address the VTS server will listen on in the
+form <code>&lt;host&gt;:&lt;port&gt;</code>. Only specify this if you want to restrict the server to
+listen on a particular interface; otherwise, the server will listen on all
+interfaces on the port specified in <code>server-addr</code>.</li>
+<li><code>tls</code> (optional): specifies whether TLS should be used for client
+connections. Defaults to <code>true</code>.</li>
+<li><code>cert</code>: path to the file containing the certificate that should be
+used by the server if <code>tls</code> (see above) is <code>true</code>.</li>
+<li><code>cert-key</code>: path to the file containing the key associated with the
+certificate specified by <code>server-cert</code> (see above).</li>
+<li><code>ca-certs</code> (optional): a list of paths to certificates that will be used
+in addition to system certs during mutual validation with the client when
+<code>tls</code> (see above) is <code>true</code>.</li>
+</ul>
+<h2 id="authentication-configuration"><a class="header" href="#authentication-configuration">Authentication configuration</a></h2>
+<p>Authentication configuration is specified under <code>auth</code> top-level entry.</p>
+<ul>
+<li>
+<p><code>backend</code>: specifies which auth backend will be used by the service. The
+valid options are:</p>
+<ul>
+<li><code>passthrough</code>: a backend that does not perform any authentication, allowing
+all requests.</li>
+<li><code>none</code>: alias for <code>passthrough</code>.</li>
+<li><code>basic</code>: Uses the Basic HTTP authentication scheme. See
+<a href="https://datatracker.ietf.org/doc/html/rfc7617">RFC7617</a> for details. This
+is not intended for production.</li>
+<li><code>keycloak</code>: Uses OpenID Connect protocol as implemented by the Keycloak
+authentication server.</li>
+</ul>
+</li>
+</ul>
+<p>The rest of the expected entries are defined by the value of <code>backend</code>. See
+below for details of how to configure individual backends.</p>
+<h3 id="passthrough"><a class="header" href="#passthrough">Passthrough</a></h3>
+<p>No additional configuration is required. <code>passthrough</code> will allow all requests.
+This is the default if <code>auth</code> configuration is not provided.</p>
+<h3 id="basic"><a class="header" href="#basic">Basic</a></h3>
+<ul>
+<li>
+<p><code>users</code>: this is a mapping of user names onto their bcrypt password hashes
+and roles. The key of the mapping is the user name, the value is a further
+mapping for the details with the following fields:</p>
+<ul>
+<li><code>password</code>: the bcrypt hash of the user's password.</li>
+<li><code>roles</code>: either a single role or a list of roles associated with the
+user. API authrization will be performed based on the user's roles.</li>
+</ul>
+</li>
+</ul>
+<p>On Linux, bcrypt hashes can be generated on the command line using <code>mkpasswd</code>
+utility, e.g.:</p>
+<pre><code class="language-bash">mkpasswd -m bcrypt --stdin &lt;&lt;&lt; Passw0rd!
+</code></pre>
+<p>For example:</p>
+<pre><code class="language-yaml">auth:
+  backend: basic
+  users:
+    user1:
+      password: "$2b$05$XgVBveh6QPrRHXI.8S/J9uobBR7Wv9z4CL8yACHEmKIQmYSSyKAqC" # Passw0rd!
+      roles: provisioner
+    user2:
+      password: "$2b$05$x5fvAV5WPkX0KXzqf5FMKODz0uyi2ioew1lOrF2Czp2aNH1LQmhki" # @s3cr3t
+      roles: [manager, provisioner]
+</code></pre>
+<h3 id="keycloak"><a class="header" href="#keycloak">Keycloak</a></h3>
+<ul>
+<li><code>host</code> (optional): host name of the Keycloak service. Defaults to
+<code>localhost</code>.</li>
+<li><code>port</code> (optional): the port on which the Keycloak service is listening.
+Defaults to <code>11111</code>.</li>
+<li><code>realm</code> (optional): the Keycloak realm used by Veraison. A realm contains the
+configuration for clients, users, roles, etc. It is roughly analogous to a
+"tenant id". Defaults to <code>veraison</code>.</li>
+<li><code>ca-cert</code>: the path to a PEM-encoded x509 cert that will be added to CA certs
+when establishing connection to the Keycloak server. This should be specified
+if the server has HTTPS enabled and the root CA for its cert is not installed
+in the system.</li>
+</ul>
+<p>For example:</p>
+<pre><code class="language-yaml">auth:
+  backend: keycloak
+  host: keycloak.example.com
+  port: 11111
+  realm: veraison
+</code></pre>
+<h2 id="kv-store-configuration"><a class="header" href="#kv-store-configuration">KV Store configuration</a></h2>
+<p><code>kvstore</code> expects the following entries in configuration:</p>
+<ul>
+<li><code>backend</code>: the name of the backend to use for the store. Currently supported
+backends: <code>memory</code>, <code>sql</code>.</li>
+<li><code>&lt;backend name&gt;</code>: an entry with the name of a backend is used to specify the
+configuration for that backend. There may be multiple such entries for different
+backends. Only the entry matching the active backend specified by <code>backend</code>
+directive will actually be used. The contents for each entry is specific to
+the backend.</li>
+</ul>
+<p>Note: in a config file, <code>kvstore</code> configuration will typically be namespaced
+under the name of a particular store instance, e.g.</p>
+<pre><code class="language-yaml">ta-store:
+  backend: sql
+  sql:
+    driver: sqlite3
+</code></pre>
+<h4 id="memory-backend-configuration"><a class="header" href="#memory-backend-configuration"><code>memory</code> backend configuration</a></h4>
+<p>Currently, <code>memory</code> backend does not support any configuration.</p>
+<h4 id="sql-backend-configuration"><a class="header" href="#sql-backend-configuration"><code>sql</code> backend configuration</a></h4>
+<div class="mdbook-alerts mdbook-alerts-note">
+<p class="mdbook-alerts-title">
+  <span class="mdbook-alerts-icon"></span>
+  note
+</p>
+<p><code>sqlite3</code>, the default driver for the backend, is unsuitable for
+production or performance testing.</p>
+</div>
+<ul>
+<li><code>driver</code>: The name of the golang SQL driver. Veraison currently includes the
+following drivers: <code>sqlite3</code>, <code>mysql</code> (MySQL and MariaDB), and <code>pgx</code>
+(Postgres).</li>
+<li><code>datasource</code>: This points to the database the driver will access. The format
+is driver-dependent.
+<ul>
+<li><code>sqlite3</code>: the path to the sqlite3 database file</li>
+<li><code>pgx</code>: a URL in the form <code>postgresql://&lt;user&gt;:&lt;passwd&gt;@&lt;host&gt;:&lt;port&gt;/&lt;database&gt;</code></li>
+<li><code>mysql</code>: string in the form <code>&lt;user&gt;:&lt;password&gt;@&lt;protocol&gt;(&lt;address&gt;)/&lt;database&gt;</code>
+(Please see the drivers' documentation for more details.)</li>
+</ul>
+</li>
+<li><code>tablename</code> (optional): the name of the table within the SQL database that will
+be used by the store. If this is not specified, it will default to <code>"kvstore"</code>.</li>
+<li><code>max_connections</code> (optional): the maximum number of parallel connections to
+DBMS that will be opened by the SQL driver. Once this number is reached,
+further transactions will block until a connection becomes available.
+Defaults to <code>10</code>.</li>
+</ul>
+<div class="mdbook-alerts mdbook-alerts-note">
+<p class="mdbook-alerts-title">
+  <span class="mdbook-alerts-icon"></span>
+  note
+</p>
+<p><code>max_connections</code>, like all settings above, is specific to the
+store for which it is being configured. This means that the total maximum
+numer of connectins Veraison will try to open is the sum of the
+<code>max_connections</code> values for all three stores (<code>30</code> by default).</p>
+</div>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
+<p>This is an example of a complete configuration for all Veraison services.</p>
+<pre><code class="language-yaml">auth:
+   backend: keycloak
+   host: keycloak.example.com
+   port: 11111
+ear-signer:
+  alg: ES256
+  key: /opt/veraison/signing/skey.jwk
+en-store:
+  backend: sql
+  sql:
+    max_connections: 8
+    driver: pgx
+    datasource: postgres://veraison:p4ssw0rd@postgres.example.com:5432/veraison
+    tablename: endorsements
+logging:
+  level: info
+  output-paths:
+    - stdout
+    - /opt/veraison/logs/{{ .service }}-stdout.log
+management:
+  listen-addr: 0.0.0.0:8088
+  protocol: https
+  cert: /opt/veraison/certs/management.crt
+  cert-key: /opt/veraison/certs/management.key
+plugin:
+  backend: go-plugin
+  go-plugin:
+    dir: /opt/veraison/plugins/
+po-agent:
+    backend: opa
+po-store:
+  backend: sql
+  sql:
+    max_connections: 8
+    driver: pgx
+    datasource: postgres://veraison:p4ssw0rd@postgres.example.com:5432/veraison
+    tablename: policies
+provisioning:
+  listen-addr: 0.0.0.0:8888
+  protocol: https
+  cert: /opt/veraison/certs/provisioning.crt
+  cert-key: /opt/veraison/certs/provisioning.key
+sessionmanager:
+  backend: memcached
+  memcached:
+    servers:
+        - memcached1.example.com:11211
+        - memcached2.example.com:11211
+ta-store:
+  backend: sql
+  sql:
+    max_connections: 8
+    driver: pgx
+    datasource: postgres://veraison:p4ssw0rd@postgres.example.com:5432/veraison
+    tablename: trust_anchors
+verification:
+  listen-addr: 0.0.0.0:8080
+  protocol: https
+  cert: /opt/veraison/certs/verification.crt
+  cert-key: /opt/veraison/certs/verification.key
+vts:
+  server-addr: localhost:50051
+  tls: true
+  cert: /opt/veraison/certs/vts.crt
+  cert-key: /opt/veraison/certs/vts.key
+  ca-certs: /opt/veraison/certs/rootCA.crt
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../services/deployments/rpm.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../services/schemes/overview.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../services/deployments/rpm.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../services/schemes/overview.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/pagetoc.js"></script>
+        <script src="../mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+
+
+    </div>
+    </body>
+</html>
